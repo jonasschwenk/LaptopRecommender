@@ -37,10 +37,12 @@ import nlp.dkpro.backend.NlpSingleton;
 /*
  * This class is the actual skill. Here you receive the input and have to produce the speech output. 
  */
+
 public class AlexaSkillSpeechlet
     implements SpeechletV2
 {
-    public static String userRequest;
+	public int counter = 0;
+	public static String userRequest;
 
     static Logger logger = LoggerFactory.getLogger(AlexaSkillSpeechlet.class);
 
@@ -62,6 +64,7 @@ public class AlexaSkillSpeechlet
     @Override
     public SpeechletResponse onIntent(SpeechletRequestEnvelope<IntentRequest> requestEnvelope)
     {
+    	
         IntentRequest request = requestEnvelope.getRequest();
 
         Intent intent = request.getIntent();
@@ -70,10 +73,50 @@ public class AlexaSkillSpeechlet
         logger.info("Received following text: [" + userRequest + "]");
 
         String result = analyze(userRequest);
+        String question;
         
-        // use this method if you want to repond with a simple text
-        return response("Erkannte Nomen: " + result);
-//        return responseWithFlavour("Erkannte Nomen: " + result, new Random().nextInt(5));
+        //Selection of question
+        switch(counter){ 
+        case 0: 
+       	 question ="Möchten Sie das Notebook produktiv einsetzen?";
+       	 counter ++;
+            break; 
+        case 1: 
+       	 question = "Möchten Sie viele Texte mit dem Notebook verfassen?";
+       	counter ++;
+            break; 
+        case 2: 
+       	 question = "Möchten Sie Foto und Videobearbeitung mit dem Notebook durchführen?";
+       	counter ++;
+            break; 
+        case 3: 
+       	 question = "Möchten Sie das Notebook häufig transportieren?";
+       	counter ++;
+            break; 
+        case 4: 
+       	 question = "Arbeiten Sie häufig unterwegs und ohne Zugriff auf eine Steckdose?";
+       	counter ++;
+            break;
+        case 5:
+        	question = "Möchten Sie das Notebook für Multimedia Inhalte, zum Beispiel zum Filme schauen, nutzen?";
+        	counter ++;
+        	break;
+        case 6:
+        	question = "Möchten Sie mit dem Notebook Spiele spielen?";
+        	counter ++;
+        	break;
+        case 7:
+        	question = "Benötigen Sie viel Speicherplatz?";
+        	counter ++;
+        	break;
+        default: 
+       	 question = "Der Counter ist kleiner 0 oder größer 7!";
+       	 counter = 0;
+       	 //The program doesn't stop at the moment rather it starts at question 1
+        }
+        
+        
+        return askUserResponse(question);
     }
 
     /**
@@ -140,20 +183,15 @@ public class AlexaSkillSpeechlet
      * The first question presented to the skill user (entry point)
      */
     private SpeechletResponse getWelcomeResponse(){
-        return askUserResponse("<amazon:effect name=\"whispered\">Hey Leute</amazon:effect>, ich bin ein <phoneme alphabet=\"ipa\" ph=\"ËˆfÊŒni\">funny</phoneme> Nomen <phoneme alphabet=\"ipa\" ph=\"bÉ’t\">bot</phoneme>! Sag einen Satz und ich nenne dir die enthaltenen Nomen");
+    	return askUserResponse("Willkommen bei der Notebookberatung durch Alexa!");
+       //    	return askUserResponse("<amazon:effect name=\"whispered\">Hey Leute</amazon:effect>, ich bin ein <phoneme alphabet=\"ipa\" ph=\"ËˆfÊŒni\">funny</phoneme> Nomen <phoneme alphabet=\"ipa\" ph=\"bÉ’t\">bot</phoneme>! Sag einen Satz und ich nenne dir die enthaltenen Nomen");
     }
 
     /**
      * Tell the user something - the Alexa session ends after a 'tell'
      */
-    private SpeechletResponse response(String text)
-    {
-        // Create the plain text output.
-        PlainTextOutputSpeech speech = new PlainTextOutputSpeech();
-        speech.setText(text);
-
-        return SpeechletResponse.newTellResponse(speech);
-    }
+    
+    
 
     /**
      * A response to the original input - the session stays alive after an ask request was send.
