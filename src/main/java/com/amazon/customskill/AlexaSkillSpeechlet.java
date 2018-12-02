@@ -74,49 +74,58 @@ public class AlexaSkillSpeechlet
 
         String result = analyze(userRequest);
         String question;
-        
-        //Selection of question
-        switch(counter){ 
-        case 0: 
-       	 question ="Möchten Sie das Notebook produktiv einsetzen?";
-       	 counter ++;
-            break; 
-        case 1: 
-       	 question = "Möchten Sie viele Texte mit dem Notebook verfassen?";
-       	counter ++;
-            break; 
-        case 2: 
-       	 question = "Möchten Sie Foto und Videobearbeitung mit dem Notebook durchführen?";
-       	counter ++;
-            break; 
-        case 3: 
-       	 question = "Möchten Sie das Notebook häufig transportieren?";
-       	counter ++;
-            break; 
-        case 4: 
-       	 question = "Arbeiten Sie häufig unterwegs und ohne Zugriff auf eine Steckdose?";
-       	counter ++;
-            break;
-        case 5:
-        	question = "Möchten Sie das Notebook für Multimedia Inhalte, zum Beispiel zum Filme schauen, nutzen?";
-        	counter ++;
-        	break;
-        case 6:
-        	question = "Möchten Sie mit dem Notebook Spiele spielen?";
-        	counter ++;
-        	break;
-        case 7:
-        	question = "Benötigen Sie viel Speicherplatz?";
-        	counter ++;
-        	break;
-        default: 
-       	 question = "Der Counter ist kleiner 0 oder größer 7!";
-       	 counter = 0;
-       	 //The program doesn't stop at the moment rather it starts at question 1
+        if(counter < 8) {
+        	question = selectQuestion();
+        	return askUserResponse(question);
+        }else {
+        	String end ="";
+        	counter = 0;
+        	return endResponse(end);
         }
+    }
+    
+    private String selectQuestion() {
+    	String question;
+    	 switch(counter){ 
+         case 0: 
+        	 question ="Möchten Sie das Notebook produktiv einsetzen?";
+        	 counter ++;
+             break; 
+         case 1: 
+        	 question = "Möchten Sie viele Texte mit dem Notebook verfassen?";
+        	counter ++;
+             break; 
+         case 2: 
+        	 question = "Möchten Sie Foto und Videobearbeitung mit dem Notebook durchführen?";
+        	counter ++;
+             break; 
+         case 3: 
+        	 question = "Möchten Sie das Notebook häufig transportieren?";
+        	counter ++;
+             break; 
+         case 4: 
+        	 question = "Arbeiten Sie häufig unterwegs und ohne Zugriff auf eine Steckdose?";
+        	counter ++;
+             break;
+         case 5:
+         	question = "Möchten Sie das Notebook für Multimedia Inhalte, zum Beispiel zum Filme schauen, nutzen?";
+         	counter ++;
+         	break;
+         case 6:
+         	question = "Möchten Sie mit dem Notebook Spiele spielen?";
+         	counter ++;
+         	break;
+         case 7:
+         	question = "Benötigen Sie viel Speicherplatz?";
+         	counter ++;
+         	break;
+         default: 
+        	 question = "Der Counter ist kleiner 0 oder größer 7!";
+        	 counter = 0;
+        	 //The program doesn't stop at the moment rather it starts at question 1
         
-        
-        return askUserResponse(question);
+         }
+    	 return question;
     }
 
     /**
@@ -183,7 +192,7 @@ public class AlexaSkillSpeechlet
      * The first question presented to the skill user (entry point)
      */
     private SpeechletResponse getWelcomeResponse(){
-    	return askUserResponse("Willkommen bei der Notebookberatung durch Alexa!");
+    	return askUserResponse("Willkommen bei der Notebookberatung durch Alexa! Ich werde Ihnen eine Reihe an Fragen stellen und an Hand Ihrer Antworten ein Anforderungsprofil erstellen, auf dessen Basis ich Ihnen eine Laptop Empfehlung aussprechen werde!");
        //    	return askUserResponse("<amazon:effect name=\"whispered\">Hey Leute</amazon:effect>, ich bin ein <phoneme alphabet=\"ipa\" ph=\"ËˆfÊŒni\">funny</phoneme> Nomen <phoneme alphabet=\"ipa\" ph=\"bÉ’t\">bot</phoneme>! Sag einen Satz und ich nenne dir die enthaltenen Nomen");
     }
 
@@ -211,6 +220,12 @@ public class AlexaSkillSpeechlet
         rep.setOutputSpeech(repromptSpeech);
 
         return SpeechletResponse.newAskResponse(speech, rep);
+    }
+    
+    private SpeechletResponse endResponse(String text) {
+    	SsmlOutputSpeech outputSpeech = new SsmlOutputSpeech();
+    	outputSpeech.setSsml("<speak>" + text + "</speak>");    
+    	return SpeechletResponse.newTellResponse(outputSpeech);
     }
 
 }
