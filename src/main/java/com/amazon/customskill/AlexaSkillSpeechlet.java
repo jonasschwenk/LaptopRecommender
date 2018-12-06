@@ -47,6 +47,8 @@ public class AlexaSkillSpeechlet
     static Logger logger = LoggerFactory.getLogger(AlexaSkillSpeechlet.class);
 
     private PosTagger p;
+    
+    private static String[8] answers = new String[];
 
     @Override
     public void onSessionStarted(SpeechletRequestEnvelope<SessionStartedRequest> requestEnvelope)
@@ -70,6 +72,8 @@ public class AlexaSkillSpeechlet
         Intent intent = request.getIntent();
 
         userRequest = intent.getSlot("Alles").getValue();
+        if (counter > 0)
+        	answers[counter - 1] = userRequest;
         logger.info("Received following text: [" + userRequest + "]");
 
         String result = analyze(userRequest);
@@ -78,7 +82,7 @@ public class AlexaSkillSpeechlet
         	question = selectQuestion();
         	return askUserResponse(question);
         }else {
-        	String end ="";
+        	String end = arrayToString(answers);
         	counter = 0;
         	return endResponse(end);
         }
@@ -224,8 +228,15 @@ public class AlexaSkillSpeechlet
     
     private SpeechletResponse endResponse(String text) {
     	SsmlOutputSpeech outputSpeech = new SsmlOutputSpeech();
-    	outputSpeech.setSsml("<speak>" + text + "</speak>");    
+    	outputSpeech.setSsml("<speak>" + text + "</speak>");
+    	
     	return SpeechletResponse.newTellResponse(outputSpeech);
+    }
+    public static String arrayToString (String[] input) {
+    	String output ="";
+    	for (int i = 0 ; i < input.length() ; i++)
+    		output += input[i];
+    	return output;
     }
 
 }
