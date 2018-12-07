@@ -76,13 +76,20 @@ public class AlexaSkillSpeechlet
 
         //String result = analyze(userRequest);
         String question;
-        if(counter < 4) {
-        	question = selectQuestion();
-        	return askUserResponse(question);
-        }else {
-        	String end = createAnswerURL(answers);
-        	counter = 0;
-        	return endResponse(end);
+        if(counter>1&&answerasint==2){ // Fall mindestens erste Frage gestellt und antwort nicht verstanden
+            counter=-1;
+            question= selectQuestion();
+            return askUserResponse(question);
+        }
+        else {
+            if (counter < 4) { //Antwort verstanden und nächste Frage wird gestellt
+                question = selectQuestion();
+                return askUserResponse(question);
+            } else {        //Antwort verstanden und letzte Frage gestellt
+                String end = createAnswerURL(answers);
+                counter = 0;
+                return endResponse(end);
+            }
         }
     }
     public int analyseAnswer(String answer){            // Antwort analysieren
