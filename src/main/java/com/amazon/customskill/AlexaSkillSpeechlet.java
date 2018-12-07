@@ -85,23 +85,21 @@ public class AlexaSkillSpeechlet
         	return endResponse(end);
         }
     }
-    public int analyseAnswer(String answer){
+    public int analyseAnswer(String answer){            // Antwort analysieren
         int analysedanswer=2;
         StringTokenizer token = new StringTokenizer(answer);
         int length = token.countTokens();
         String[] cuttedanswer= new String[length];
-        for(int i=0; i<length;i++){
+        for(int i=0; i<length;i++){             //zurückgeliferte Antwort in einzelne Wörter zerlegen
             cuttedanswer[i]=token.nextToken();
         }
-        for(int i=0; i<length;i++){
-            if(cuttedanswer[i].equals("ja")){
-                analysedanswer= 1; // case answer ja
+        for(int i=0; i<length;i++){         // alle Wörter durchgehen und auf ja und nein überprüfen
+            if(cuttedanswer[i].equals("ja")) {
+                analysedanswer = 1; // case answer ja
             }
-            else{
                 if (cuttedanswer[i].equals("nein")) {
                     analysedanswer= 0;// case answer nein
                     }
-                }
         }
         return analysedanswer;
     }
