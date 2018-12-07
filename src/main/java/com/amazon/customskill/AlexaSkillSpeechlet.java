@@ -9,10 +9,7 @@
  */
 package com.amazon.customskill;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.IntStream;
 
 import org.apache.commons.lang.StringUtils;
@@ -48,7 +45,7 @@ public class AlexaSkillSpeechlet
 
     private PosTagger p;
     
-    private static String[8] answers = new String[];
+    private static int[] answers = new int[4];
 
     @Override
     public void onSessionStarted(SpeechletRequestEnvelope<SessionStartedRequest> requestEnvelope)
@@ -72,54 +69,97 @@ public class AlexaSkillSpeechlet
         Intent intent = request.getIntent();
 
         userRequest = intent.getSlot("Alles").getValue();
-        if (counter > 0)
-        	answers[counter - 1] = userRequest;
+        int answerasint = analyseAnswer(userRequest);
+        if (counter > 0&& answerasint<2)
+            answers[counter - 1] = answerasint;
         logger.info("Received following text: [" + userRequest + "]");
 
-        String result = analyze(userRequest);
+        //String result = analyze(userRequest);
         String question;
-        if(counter < 8) {
+        if(counter < 4) {
         	question = selectQuestion();
         	return askUserResponse(question);
         }else {
-        	String end = arrayToString(answers);
+        	String end = createAnswerURL(answers);
         	counter = 0;
         	return endResponse(end);
         }
+    }
+    public int analyseAnswer(String answer){
+        int analysedanswer=2;
+        StringTokenizer token = new StringTokenizer(answer);
+        int length = token.countTokens();
+        String[] cuttedanswer= new String[length];
+        for(int i=0; i<length;i++){
+            cuttedanswer[i]=token.nextToken();
+        }
+        for(int i=0; i<length;i++){
+            if(cuttedanswer[i].equals("ja")){
+                analysedanswer= 1; // case answer ja
+            }
+            else{
+                if (cuttedanswer[i].equals("nein")) {
+                    analysedanswer= 0;// case answer nein
+                    }
+                }
+        }
+        return analysedanswer;
+    }
+
+    public String createAnswerURL(int[] answerArray){
+        String url= new String();
+        if(answerArray[0]==0&&answerArray[1]==0&&answerArray[2]==0&&answerArray[3]==0)
+            url="";
+        if(answerArray[0]==0&&answerArray[1]==0&&answerArray[2]==0&&answerArray[3]==1)
+            url="";
+        if(answerArray[0]==0&&answerArray[1]==0&&answerArray[2]==1&&answerArray[3]==0)
+            url="";
+        if(answerArray[0]==0&&answerArray[1]==0&&answerArray[2]==1&&answerArray[3]==1)
+            url="";
+        if(answerArray[0]==0&&answerArray[1]==1&&answerArray[2]==0&&answerArray[3]==0)
+            url="";
+        if(answerArray[0]==0&&answerArray[1]==1&&answerArray[2]==0&&answerArray[3]==1)
+            url="";
+        if(answerArray[0]==0&&answerArray[1]==1&&answerArray[2]==1&&answerArray[3]==0)
+            url="";
+        if(answerArray[0]==0&&answerArray[1]==1&&answerArray[2]==1&&answerArray[3]==1)
+            url="";
+        if(answerArray[0]==1&&answerArray[1]==0&&answerArray[2]==0&&answerArray[3]==0)
+            url="";
+        if(answerArray[0]==1&&answerArray[1]==0&&answerArray[2]==0&&answerArray[3]==1)
+            url="";
+        if(answerArray[0]==1&&answerArray[1]==0&&answerArray[2]==1&&answerArray[3]==0)
+            url="";
+        if(answerArray[0]==1&&answerArray[1]==0&&answerArray[2]==1&&answerArray[3]==1)
+            url="";
+        if(answerArray[0]==1&&answerArray[1]==1&&answerArray[2]==0&&answerArray[3]==0)
+            url="";
+        if(answerArray[0]==1&&answerArray[1]==1&&answerArray[2]==0&&answerArray[3]==1)
+            url="";
+        if(answerArray[0]==1&&answerArray[1]==1&&answerArray[2]==1&&answerArray[3]==0)
+            url="";
+        if(answerArray[0]==1&&answerArray[1]==1&&answerArray[2]==1&&answerArray[3]==1)
+            url="";
+
+        return url;
     }
     
     private String selectQuestion() {
     	String question;
     	 switch(counter){ 
          case 0: 
-        	 question ="Möchten Sie das Notebook produktiv einsetzen?";
+        	 question ="Möchten Sie das Notebook produktiv einsetzen, um zum Beispiel TExte zu ferfassen oder Fotos und Videos zu bearbeiten?";
         	 counter ++;
-             break; 
-         case 1: 
-        	 question = "Möchten Sie viele Texte mit dem Notebook verfassen?";
-        	counter ++;
-             break; 
-         case 2: 
-        	 question = "Möchten Sie Foto und Videobearbeitung mit dem Notebook durchführen?";
-        	counter ++;
-             break; 
-         case 3: 
+             break;
+         case 1:
         	 question = "Möchten Sie das Notebook häufig transportieren?";
         	counter ++;
-             break; 
-         case 4: 
-        	 question = "Arbeiten Sie häufig unterwegs und ohne Zugriff auf eine Steckdose?";
-        	counter ++;
              break;
-         case 5:
-         	question = "Möchten Sie das Notebook für Multimedia Inhalte, zum Beispiel zum Filme schauen, nutzen?";
-         	counter ++;
-         	break;
-         case 6:
+         case 2:
          	question = "Möchten Sie mit dem Notebook Spiele spielen?";
          	counter ++;
          	break;
-         case 7:
+         case 3:
          	question = "Benötigen Sie viel Speicherplatz?";
          	counter ++;
          	break;
@@ -232,11 +272,11 @@ public class AlexaSkillSpeechlet
     	
     	return SpeechletResponse.newTellResponse(outputSpeech);
     }
-    public static String arrayToString (String[] input) {
+   /* public static String arrayToString (String[] input) {
     	String output ="";
     	for (int i = 0 ; i < input.length() ; i++)
     		output += input[i];
     	return output;
-    }
+    }*/
 
 }
