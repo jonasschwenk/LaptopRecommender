@@ -69,8 +69,8 @@ public class AlexaSkillSpeechlet
         Intent intent = request.getIntent();
 
         userRequest = intent.getSlot("Alles").getValue();
-        int answerasint = analyseAnswer(userRequest);
-        if (counter > 0&& answerasint<2)
+        int answerasint = analyseAnswer(userRequest);//Analysiere die Antwort und gibt bei nein 0 ja 1 und sonst 2 zurück
+        if (counter > 0&& answerasint<2) //Antwort verstanden und gespeichert im Antwortenarray
             answers[counter - 1] = answerasint;
         logger.info("Received following text: [" + userRequest + "]");
 
