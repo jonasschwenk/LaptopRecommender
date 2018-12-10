@@ -101,12 +101,12 @@ public class AlexaSkillSpeechlet
             cuttedanswer[i]=token.nextToken();
         }
         for(int i=0; i<length;i++){         // alle Wörter durchgehen und auf ja und nein überprüfen
-            if(cuttedanswer[i].equals("ja")||cuttedanswer[i].equals("genau")||cuttedanswer[i].equals("exakt")||cuttedanswer[i].equals("jeden")||cuttedanswer[i].equals("immer")) {
+            if(cuttedanswer[i].equalsIgnoreCase("ja")||cuttedanswer[i].equalsIgnoreCase("genau")||cuttedanswer[i].equalsIgnoreCase("exakt")||cuttedanswer[i].equalsIgnoreCase("jeden")||cuttedanswer[i].equalsIgnoreCase("immer")) {
                 analysedanswer = 1; // case answer ja
             }
-                if (cuttedanswer[i].equals("nein")||cuttedanswer[i].equals("keinen")||cuttedanswer[i].equals("niemals")||cuttedanswer[i].equals("ne")) {
-                    analysedanswer= 0;// case answer nein
-                    }
+            if (cuttedanswer[i].equalsIgnoreCase("nein")||cuttedanswer[i].equalsIgnoreCase("keinen")||cuttedanswer[i].equalsIgnoreCase("niemals")||cuttedanswer[i].equalsIgnoreCase("ne")) {
+                analysedanswer= 0;// case answer nein
+            }
         }
         return analysedanswer;
     }
