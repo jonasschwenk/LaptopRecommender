@@ -77,7 +77,7 @@ public class AlexaSkillSpeechlet
         //String result = analyze(userRequest);
         String question;
         if(counter>1&&answerasint==2){ // Fall mindestens erste Frage gestellt und antwort nicht verstanden
-            counter=-1;
+            counter-=1;
             question= selectQuestion();
             return askUserResponse(question);
         }
