@@ -104,7 +104,7 @@ public class AlexaSkillSpeechlet
             if(cuttedanswer[i].equalsIgnoreCase("ja")||cuttedanswer[i].equalsIgnoreCase("genau")||cuttedanswer[i].equalsIgnoreCase("exakt")||cuttedanswer[i].equalsIgnoreCase("jeden")||cuttedanswer[i].equalsIgnoreCase("immer")) {
                 analysedanswer = 1; // case answer ja
             }
-            if (cuttedanswer[i].equalsIgnoreCase("nein")||cuttedanswer[i].equalsIgnoreCase("keinen")||cuttedanswer[i].equalsIgnoreCase("niemals")||cuttedanswer[i].equalsIgnoreCase("ne")) {
+            if (cuttedanswer[i].equalsIgnoreCase("nein")||cuttedanswer[i].equalsIgnoreCase("keinen")||cuttedanswer[i].equalsIgnoreCase("niemals")||cuttedanswer[i].equalsIgnoreCase("ne")|| cuttedanswer[i].equalsIgnoreCase("keine")) {
                 analysedanswer= 0;// case answer nein
             }
         }
@@ -241,7 +241,7 @@ public class AlexaSkillSpeechlet
      * The first question presented to the skill user (entry point)
      */
     private SpeechletResponse getWelcomeResponse(){
-    	return askUserResponse("Willkommen bei der Notebookberatung durch Alexa! Ich werde Ihnen eine Reihe an Fragen stellen und an Hand Ihrer Antworten ein Anforderungsprofil erstellen, auf dessen Basis ich Ihnen eine Laptop Empfehlung aussprechen werde!");
+    	return askUserResponse("Willkommen bei der Notebookberatung durch Alexa! Ich werde dir eine Reihe an Fragen stellen und an Hand deiner Antworten werde ich dir eine Liste von zu dir passenden Laptops ausgeben!");
        //    	return askUserResponse("<amazon:effect name=\"whispered\">Hey Leute</amazon:effect>, ich bin ein <phoneme alphabet=\"ipa\" ph=\"ˈfʌni\">funny</phoneme> Nomen <phoneme alphabet=\"ipa\" ph=\"bɒt\">bot</phoneme>! Sag einen Satz und ich nenne dir die enthaltenen Nomen");
     }
 
