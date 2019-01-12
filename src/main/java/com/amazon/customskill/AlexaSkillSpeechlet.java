@@ -39,13 +39,15 @@ public class AlexaSkillSpeechlet
     implements SpeechletV2
 {
 	public int counter = 0;
+	public int fragenid=0;
 	public static String userRequest;
 
     static Logger logger = LoggerFactory.getLogger(AlexaSkillSpeechlet.class);
 
     private PosTagger p;
     
-    private static int[] answers = new int[4];
+    private static int[] answers = {2,2,2,2};
+
 
     @Override
     public void onSessionStarted(SpeechletRequestEnvelope<SessionStartedRequest> requestEnvelope)
@@ -60,7 +62,7 @@ public class AlexaSkillSpeechlet
         return getWelcomeResponse();
     }
 
-    @Override
+    /*@Override
     public SpeechletResponse onIntent(SpeechletRequestEnvelope<IntentRequest> requestEnvelope)
     {
     	
@@ -91,6 +93,161 @@ public class AlexaSkillSpeechlet
                 return endResponse(end);
             }
         }
+    }*/
+
+    @Override
+    public SpeechletResponse onIntent(SpeechletRequestEnvelope<IntentRequest> requestEnvelope)
+    {
+
+        IntentRequest request = requestEnvelope.getRequest();
+
+        Intent intent = request.getIntent();
+
+        userRequest = intent.getSlot("Alles").getValue();
+        int answerasint = analyseAnswer(userRequest);//Analysiere die Antwort und gibt bei nein 0 ja 1 und sonst 2 zurück
+        if (fragenid > 0&& answerasint<2) //Antwort verstanden und gespeichert im Antwortenarray
+            answers[counter - 1] = answerasint;
+        logger.info("Received following text: [" + userRequest + "]");
+
+        String question;
+        if(counter==0){
+            question= selectQuestion(0);
+            return askUserResponse(question);
+        }
+        if(counter==1) {
+            if (answerasint == 2) {
+                counter = counter - 1;
+                question = selectQuestion(0);
+                return askUserResponse(question);
+            }
+            if (answerasint == 0) { //erste antwort nein
+                fragenid=1;
+                question = selectQuestion(fragenid);
+                return askUserResponse(question);
+            }
+            if (answerasint == 1) { //erste antwort ja
+                fragenid=2;
+                question = selectQuestion(fragenid);
+                return askUserResponse(question);
+            }
+        }
+        if(fragenid==1){
+            if (answerasint == 2) {
+                question = selectQuestion(fragenid);
+                return askUserResponse(question);
+            }
+            if (answerasint == 0|| answerasint==1) { //zweite antwort nein oder ja
+                fragenid=3;
+                question = selectQuestion(fragenid);
+                return askUserResponse(question);
+            }
+        }
+        if(fragenid==2){
+            if(answerasint==2){
+                question=selectQuestion(fragenid);
+                return askUserResponse(question);
+            }
+            if(answerasint==0||answerasint==1){
+                fragenid=4;
+                question=selectQuestion(fragenid);
+                return askUserResponse(question);
+
+            }
+        }
+        if(fragenid==3) {
+            if (answerasint == 2) {
+                question = selectQuestion(fragenid);
+                return askUserResponse(question);
+            }
+            if (answerasint == 0) {
+                String answer="";
+                return askUserResponse(answer);
+            }
+            if (answerasint == 1) {
+                fragenid=5;
+                question = selectQuestion(fragenid);
+                return askUserResponse(question);
+            }
+
+        }
+        if(fragenid==4) {
+            if (answerasint == 2) {
+                question = selectQuestion(fragenid);
+                return askUserResponse(question);
+            }  if (answerasint == 0) {
+                fragenid=6;
+                question=selectQuestion(fragenid);
+                return askUserResponse(question);
+            }
+            if (answerasint == 1) {
+                String answer="";
+                return askUserResponse(answer);
+            }
+        }
+        if(fragenid==5) {
+            if (answerasint == 2) {
+                question = selectQuestion(fragenid);
+                return askUserResponse(question);
+            }  if (answerasint == 0) {
+                fragenid=7;
+                question=selectQuestion(fragenid);
+                return askUserResponse(question);
+            }
+            if (answerasint == 1) {
+                String answer="";
+                return askUserResponse(answer);
+            }
+        }
+        if(fragenid==6){
+            if(answerasint==2){
+                question=selectQuestion(fragenid);
+                return askUserResponse(question);
+            }
+            if(answerasint==0||answerasint==1){
+                fragenid=8;
+                question=selectQuestion(fragenid);
+                return askUserResponse(question);
+
+            }
+        }
+        if(fragenid==7) {
+            if (answerasint == 2) {
+                question = selectQuestion(fragenid);
+                return askUserResponse(question);
+            }  if (answerasint == 0) {
+                fragenid=9;
+                question=selectQuestion(fragenid);
+                return askUserResponse(question);
+            }
+            if (answerasint == 1) {
+                String answer="";
+                return askUserResponse(answer);
+            }
+        }
+        if(fragenid==8){
+            if(answerasint==2){
+                question=selectQuestion(fragenid);
+                return askUserResponse(question);
+            }
+            if(answerasint==0||answerasint==1){
+                String answer="";
+                return askUserResponse(answer);
+
+            }
+        }
+        if(fragenid==9){
+            if(answerasint==2){
+                question=selectQuestion(fragenid);
+                return askUserResponse(question);
+            }
+            if(answerasint==0||answerasint==1){
+                fragenid=8;
+                String answer="";
+                return askUserResponse(answer);
+
+            }
+        }
+        return askUserResponse("Dieser Zustand hätte nie eintreffen dürfen!!");
     }
     public int analyseAnswer(String answer){            // Antwort analysieren
         int analysedanswer=2;
@@ -153,28 +310,103 @@ public class AlexaSkillSpeechlet
     	String question;
     	 switch(counter){ 
          case 0: 
-        	 question ="Möchten Sie das Notebook produktiv einsetzen, um zum Beispiel TExte zu ferfassen oder Fotos und Videos zu bearbeiten?";
+        	 question ="Möchtest du das Notebook zum arbeiten also produktiv einsetzten?";
         	 counter ++;
              break;
          case 1:
-        	 question = "Möchten Sie das Notebook häufig transportieren?";
+        	 question = "Möchtest du über deinen Laptop Filme und Videos schauen?";
         	counter ++;
              break;
          case 2:
-         	question = "Möchten Sie mit dem Notebook Spiele spielen?";
+         	question = "Möchtest du an deinem Laptop Texte verfassen?";
          	counter ++;
          	break;
          case 3:
-         	question = "Benötigen Sie viel Speicherplatz?";
+         	question = "Möchtest du auf dem Laptop Spiele spielen?";
          	counter ++;
          	break;
-         default: 
+         case 4:
+            question = "Möchtest du auf dem Laptop Bilder und Videos bearbeiten?";
+             counter ++;
+             break;
+         case 5:
+             question = "Möchtest du auf dem Laptop moderne aufwendige Spiele spielen?";
+             counter ++;
+             break;
+         case 6:
+             question = "Soll der Laptop sich für Office-Anwendungen gut eignen?";
+             counter ++;
+             break;
+         case 7:
+             question = "Soll der Laptop denn ältere, aber trotzdem noch aufwendigere Spiele unterstützen?";
+             counter ++;
+             break;
+         case 8:
+             question = "Möchtest du den Laptop zum Programmieren nutzen?";
+             counter ++;
+             break;
+         case 9:
+             question = "Möchten sie denn einfache Spiele wie Solitär oder Browserspiele spielen?";
+             counter ++;
+             break;
+        default:
         	 question = "Der Counter ist kleiner 0 oder größer 7!";
         	 counter = 0;
         	 //The program doesn't stop at the moment rather it starts at question 1
         
          }
     	 return question;
+    }
+    private String selectQuestion(int i) {
+        String question;
+        switch(i){
+            case 0:
+                question ="Möchtest du das Notebook zum arbeiten also produktiv einsetzten?";
+                counter ++;
+                break;
+            case 1:
+                question = "Möchtest du über deinen Laptop Filme und Videos schauen?";
+                counter ++;
+                break;
+            case 2:
+                question = "Möchtest du an deinem Laptop Texte verfassen?";
+                counter ++;
+                break;
+            case 3:
+                question = "Möchtest du auf dem Laptop Spiele spielen?";
+                counter ++;
+                break;
+            case 4:
+                question = "Möchtest du auf dem Laptop Bilder und Videos bearbeiten?";
+                counter ++;
+                break;
+            case 5:
+                question = "Möchtest du auf dem Laptop moderne aufwendige Spiele spielen?";
+                counter ++;
+                break;
+            case 6:
+                question = "Soll der Laptop sich für Office-Anwendungen gut eignen?";
+                counter ++;
+                break;
+            case 7:
+                question = "Soll der Laptop denn ältere, aber trotzdem noch aufwendigere Spiele unterstützen?";
+                counter ++;
+                break;
+            case 8:
+                question = "Möchtest du den Laptop zum Programmieren nutzen?";
+                counter ++;
+                break;
+            case 9:
+                question = "Möchten sie denn einfache Spiele wie Solitär oder Browserspiele spielen?";
+                counter ++;
+                break;
+            default:
+                question = "Der Counter ist kleiner 0 oder größer 7!";
+                counter = 0;
+                //The program doesn't stop at the moment rather it starts at question 1
+
+        }
+        return question;
     }
 
     /**
