@@ -46,7 +46,7 @@ public class AlexaSkillSpeechlet
 
     private PosTagger p;
     
-    private static int[] answers = {2,2,2,2};
+    private static int[] answers = new int[6];
 
 
     @Override
@@ -62,38 +62,6 @@ public class AlexaSkillSpeechlet
         return getWelcomeResponse();
     }
 
-    /*@Override
-    public SpeechletResponse onIntent(SpeechletRequestEnvelope<IntentRequest> requestEnvelope)
-    {
-    	
-        IntentRequest request = requestEnvelope.getRequest();
-
-        Intent intent = request.getIntent();
-
-        userRequest = intent.getSlot("Alles").getValue();
-        int answerasint = analyseAnswer(userRequest);//Analysiere die Antwort und gibt bei nein 0 ja 1 und sonst 2 zurück
-        if (counter > 0&& answerasint<2) //Antwort verstanden und gespeichert im Antwortenarray
-            answers[counter - 1] = answerasint;
-        logger.info("Received following text: [" + userRequest + "]");
-
-        //String result = analyze(userRequest);
-        String question;
-        if(counter>1&&answerasint==2){ // Fall mindestens erste Frage gestellt und antwort nicht verstanden
-            counter-=1;
-            question= selectQuestion();
-            return askUserResponse(question);
-        }
-        else {
-            if (counter < 4) { //Antwort verstanden und nächste Frage wird gestellt
-                question = selectQuestion();
-                return askUserResponse(question);
-            } else {        //Antwort verstanden und letzte Frage gestellt
-                String end = createAnswerURL(answers);
-                counter = 0;
-                return endResponse(end);
-            }
-        }
-    }*/
 
     @Override
     public SpeechletResponse onIntent(SpeechletRequestEnvelope<IntentRequest> requestEnvelope)
@@ -155,19 +123,37 @@ public class AlexaSkillSpeechlet
             }
         }
         if(fragenid==3) {
-            if (answerasint == 2) {
-                question = selectQuestion(fragenid);
-                return askUserResponse(question);
-            }
-            if (answerasint == 0) {
-                String answer="";
-                return askUserResponse(answer);
-            }
-            if (answerasint == 1) {
-                fragenid=5;
-                question = selectQuestion(fragenid);
-                return askUserResponse(question);
-            }
+        	if(counter == 5) {
+        		if (answerasint == 2) {
+        			counter = 4;
+        			question = selectQuestion(fragenid);
+                	return askUserResponse(question);
+        		}
+        		if(answerasint == 0) {
+        			String answer = "Laptop 7";
+        			return endResponse(answer);
+        		}
+        		if(answerasint == 1) {
+        			fragenid=5;
+	                question = selectQuestion(fragenid);
+	                return askUserResponse(question);
+        		}
+        	}
+        	else {
+	            if (answerasint == 2) {
+	                question = selectQuestion(fragenid);
+	                return askUserResponse(question);
+	            }
+	            if (answerasint == 0) {
+	                String answer="Laptop 1";
+	                return endResponse(answer);
+	            }
+	            if (answerasint == 1) {
+	                fragenid=5;
+	                question = selectQuestion(fragenid);
+	                return askUserResponse(question);
+	            }
+        	}
 
         }
         if(fragenid==4) {
@@ -180,23 +166,40 @@ public class AlexaSkillSpeechlet
                 return askUserResponse(question);
             }
             if (answerasint == 1) {
-                String answer="";
-                return askUserResponse(answer);
+                String answer="Laptop 5";
+                return endResponse(answer);
             }
         }
         if(fragenid==5) {
-            if (answerasint == 2) {
-                question = selectQuestion(fragenid);
-                return askUserResponse(question);
-            }  if (answerasint == 0) {
-                fragenid=7;
-                question=selectQuestion(fragenid);
-                return askUserResponse(question);
-            }
-            if (answerasint == 1) {
-                String answer="";
-                return askUserResponse(answer);
-            }
+        	if(counter == 6) {
+        		if (answerasint == 2) {
+        			counter = 5;
+	                question = selectQuestion(fragenid);
+	                return askUserResponse(question);
+	            }  if (answerasint == 0) {
+	                fragenid=7;
+	                question=selectQuestion(fragenid);
+	                return askUserResponse(question);
+	            }
+	            if (answerasint == 1) {
+	                String answer="Laptop 8";
+	                return endResponse(answer);
+	            }
+        	}
+        	else {
+	            if (answerasint == 2) {
+	                question = selectQuestion(fragenid);
+	                return askUserResponse(question);
+	            }  if (answerasint == 0) {
+	                fragenid=7;
+	                question=selectQuestion(fragenid);
+	                return askUserResponse(question);
+	            }
+	            if (answerasint == 1) {
+	                String answer="Laptop 2";
+	                return endResponse(answer);
+	            }
+        	} 
         }
         if(fragenid==6){
             if(answerasint==2){
@@ -211,18 +214,35 @@ public class AlexaSkillSpeechlet
             }
         }
         if(fragenid==7) {
-            if (answerasint == 2) {
-                question = selectQuestion(fragenid);
-                return askUserResponse(question);
-            }  if (answerasint == 0) {
-                fragenid=9;
-                question=selectQuestion(fragenid);
-                return askUserResponse(question);
-            }
-            if (answerasint == 1) {
-                String answer="";
-                return askUserResponse(answer);
-            }
+        	if(counter == 7) {
+        		if (answerasint == 2) {
+        			counter = 6;
+                    question = selectQuestion(fragenid);
+                    return askUserResponse(question);
+                }  if (answerasint == 0) {
+                    fragenid=9;
+                    question=selectQuestion(fragenid);
+                    return askUserResponse(question);
+                }
+                if (answerasint == 1) {
+                    String answer="Laptop 9";
+                    return endResponse(answer);
+                }
+        	}
+        	else {
+	            if (answerasint == 2) {
+	                question = selectQuestion(fragenid);
+	                return askUserResponse(question);
+	            }  if (answerasint == 0) {
+	                fragenid=9;
+	                question=selectQuestion(fragenid);
+	                return askUserResponse(question);
+	            }
+	            if (answerasint == 1) {
+	                String answer="Laptop 3";
+	                return endResponse(answer);
+	            }
+        	}
         }
         if(fragenid==8){
             if(answerasint==2){
@@ -230,22 +250,39 @@ public class AlexaSkillSpeechlet
                 return askUserResponse(question);
             }
             if(answerasint==0||answerasint==1){
-                String answer="";
-                return askUserResponse(answer);
-
+//                String answer="Laptop 6";
+//                return endResponse(answer);
+            	counter = 4;
+            	fragenid = 3;
+            	question = selectQuestion(fragenid);
+            	return askUserResponse(question);
             }
         }
         if(fragenid==9){
-            if(answerasint==2){
-                question=selectQuestion(fragenid);
-                return askUserResponse(question);
-            }
-            if(answerasint==0||answerasint==1){
-                fragenid=8;
-                String answer="";
-                return askUserResponse(answer);
-
-            }
+        	if(counter == 8) {
+        		if(answerasint==2){
+        			counter = 7;
+                    question=selectQuestion(fragenid);
+                    return askUserResponse(question);
+                }
+                if(answerasint==0||answerasint==1){
+//                    fragenid=8;
+                    String answer="Laptop 10";
+                    return endResponse(answer);
+                }
+        	}
+        	else {
+        		if(answerasint==2){
+                    question=selectQuestion(fragenid);
+                    return askUserResponse(question);
+                }
+                if(answerasint==0||answerasint==1){
+//                    fragenid=8;
+                    String answer="Laptop 4";
+                    return endResponse(answer);
+                }
+        	}
+            
         }
         return askUserResponse("Dieser Zustand hätte nie eintreffen dürfen!!");
     }
@@ -268,95 +305,7 @@ public class AlexaSkillSpeechlet
         return analysedanswer;
     }
 
-    public String createAnswerURL(int[] answerArray){
-        String url= new String();
-        if(answerArray[0]==0&&answerArray[1]==0&&answerArray[2]==0&&answerArray[3]==0)
-            url="";
-        if(answerArray[0]==0&&answerArray[1]==0&&answerArray[2]==0&&answerArray[3]==1)
-            url="";
-        if(answerArray[0]==0&&answerArray[1]==0&&answerArray[2]==1&&answerArray[3]==0)
-            url="";
-        if(answerArray[0]==0&&answerArray[1]==0&&answerArray[2]==1&&answerArray[3]==1)
-            url="";
-        if(answerArray[0]==0&&answerArray[1]==1&&answerArray[2]==0&&answerArray[3]==0)
-            url="";
-        if(answerArray[0]==0&&answerArray[1]==1&&answerArray[2]==0&&answerArray[3]==1)
-            url="";
-        if(answerArray[0]==0&&answerArray[1]==1&&answerArray[2]==1&&answerArray[3]==0)
-            url="";
-        if(answerArray[0]==0&&answerArray[1]==1&&answerArray[2]==1&&answerArray[3]==1)
-            url="";
-        if(answerArray[0]==1&&answerArray[1]==0&&answerArray[2]==0&&answerArray[3]==0)
-            url="";
-        if(answerArray[0]==1&&answerArray[1]==0&&answerArray[2]==0&&answerArray[3]==1)
-            url="";
-        if(answerArray[0]==1&&answerArray[1]==0&&answerArray[2]==1&&answerArray[3]==0)
-            url="";
-        if(answerArray[0]==1&&answerArray[1]==0&&answerArray[2]==1&&answerArray[3]==1)
-            url="";
-        if(answerArray[0]==1&&answerArray[1]==1&&answerArray[2]==0&&answerArray[3]==0)
-            url="";
-        if(answerArray[0]==1&&answerArray[1]==1&&answerArray[2]==0&&answerArray[3]==1)
-            url="";
-        if(answerArray[0]==1&&answerArray[1]==1&&answerArray[2]==1&&answerArray[3]==0)
-            url="";
-        if(answerArray[0]==1&&answerArray[1]==1&&answerArray[2]==1&&answerArray[3]==1)
-            url="";
 
-        return url;
-    }
-    
-    private String selectQuestion() {
-    	String question;
-    	 switch(counter){ 
-         case 0: 
-        	 question ="Möchtest du das Notebook zum arbeiten also produktiv einsetzten?";
-        	 counter ++;
-             break;
-         case 1:
-        	 question = "Möchtest du über deinen Laptop Filme und Videos schauen?";
-        	counter ++;
-             break;
-         case 2:
-         	question = "Möchtest du an deinem Laptop Texte verfassen?";
-         	counter ++;
-         	break;
-         case 3:
-         	question = "Möchtest du auf dem Laptop Spiele spielen?";
-         	counter ++;
-         	break;
-         case 4:
-            question = "Möchtest du auf dem Laptop Bilder und Videos bearbeiten?";
-             counter ++;
-             break;
-         case 5:
-             question = "Möchtest du auf dem Laptop moderne aufwendige Spiele spielen?";
-             counter ++;
-             break;
-         case 6:
-             question = "Soll der Laptop sich für Office-Anwendungen gut eignen?";
-             counter ++;
-             break;
-         case 7:
-             question = "Soll der Laptop denn ältere, aber trotzdem noch aufwendigere Spiele unterstützen?";
-             counter ++;
-             break;
-         case 8:
-             question = "Möchtest du den Laptop zum Programmieren nutzen?";
-             counter ++;
-             break;
-         case 9:
-             question = "Möchten sie denn einfache Spiele wie Solitär oder Browserspiele spielen?";
-             counter ++;
-             break;
-        default:
-        	 question = "Der Counter ist kleiner 0 oder größer 7!";
-        	 counter = 0;
-        	 //The program doesn't stop at the moment rather it starts at question 1
-        
-         }
-    	 return question;
-    }
     private String selectQuestion(int i) {
         String question;
         switch(i){
@@ -415,35 +364,7 @@ public class AlexaSkillSpeechlet
      * @param i
      * @return
      */
-    private SpeechletResponse responseWithFlavour(String text, int i) {
-       
-    	SsmlOutputSpeech speech = new SsmlOutputSpeech();
-    	 switch(i){ 
-         case 0: 
-        	 speech.setSsml("<speak><amazon:effect name=\"whispered\">" + text + "</amazon:effect></speak>");
-             break; 
-         case 1: 
-        	 speech.setSsml("<speak><emphasis level=\"strong\">" + text + "</emphasis></speak>");
-             break; 
-         case 2: 
-        	 String half1=text.split(" ")[0];
-        	 String[] rest = Arrays.copyOfRange(text.split(" "), 1, text.split(" ").length);
-        	 speech.setSsml("<speak>"+half1+"<break time=\"3s\"/>"+ StringUtils.join(rest," ") + "</speak>");
-             break; 
-         case 3: 
-        	 String firstNoun="erstes erkanntes nomen";
-        	 String firstN=text.split(" ")[3];
-        	 speech.setSsml("<speak>"+firstNoun+ "<say-as interpret-as=\"spell-out\">"+firstN+"</say-as>"+"</speak>");
-             break; 
-         case 4: 
-        	 speech.setSsml("<speak><audio src='soundbank://soundlibrary/transportation/amzn_sfx_airplane_takeoff_whoosh_01'/></speak>");
-             break;
-         default: 
-        	 speech.setSsml("<speak><amazon:effect name=\"whispered\">" + text + "</amazon:effect></speak>");
-         } 
 
-        return SpeechletResponse.newTellResponse(speech);
-	}
 
 	private String analyze(String request)
     {
@@ -473,7 +394,7 @@ public class AlexaSkillSpeechlet
      * The first question presented to the skill user (entry point)
      */
     private SpeechletResponse getWelcomeResponse(){
-    	return askUserResponse("Willkommen bei der Notebookberatung durch Alexa! Ich werde dir eine Reihe an Fragen stellen und an Hand deiner Antworten werde ich dir eine Liste von zu dir passenden Laptops ausgeben!");
+    	return askUserResponse("Willkommen bei der Notebookberatung durch Alexa! Ich werde dir eine Reihe an Fragen stellen und an Hand deiner Antworten werde ich dir eine Liste von zu dir passenden Laptops ausgeben! Sage start um zu beginnen.");
        //    	return askUserResponse("<amazon:effect name=\"whispered\">Hey Leute</amazon:effect>, ich bin ein <phoneme alphabet=\"ipa\" ph=\"ËˆfÊŒni\">funny</phoneme> Nomen <phoneme alphabet=\"ipa\" ph=\"bÉ’t\">bot</phoneme>! Sag einen Satz und ich nenne dir die enthaltenen Nomen");
     }
 
@@ -506,6 +427,8 @@ public class AlexaSkillSpeechlet
     private SpeechletResponse endResponse(String text) {
     	SsmlOutputSpeech outputSpeech = new SsmlOutputSpeech();
     	outputSpeech.setSsml("<speak>" + text + "</speak>");
+    	counter = 0;
+    	fragenid = 0;
     	
     	return SpeechletResponse.newTellResponse(outputSpeech);
     }
