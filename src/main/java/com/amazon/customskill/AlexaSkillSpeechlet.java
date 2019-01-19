@@ -72,6 +72,9 @@ public class AlexaSkillSpeechlet
         Intent intent = request.getIntent();
 
         userRequest = intent.getSlot("Alles").getValue();
+        if(userRequest.equalsIgnoreCase("abbrechen")) {
+        	return endResponse("Beratung abgebrochen!");
+        }
         int answerasint = analyseAnswer(userRequest);//Analysiere die Antwort und gibt bei nein 0 ja 1 und sonst 2 zurück
         if (fragenid > 0&& answerasint<2) //Antwort verstanden und gespeichert im Antwortenarray
             answers[counter - 1] = answerasint;
@@ -294,7 +297,7 @@ public class AlexaSkillSpeechlet
         for(int i=0; i<length;i++){             //zurückgeliferte Antwort in einzelne Wörter zerlegen
             cuttedanswer[i]=token.nextToken();
         }
-        for(int i=0; i<length;i++){         // alle Wörter durchgehen und auf ja und nein überprüfen
+        for(int i=0; i<length;i++){   // alle Wörter durchgehen und auf ja und nein überprüfen
             if(cuttedanswer[i].equalsIgnoreCase("ja")||cuttedanswer[i].equalsIgnoreCase("genau")||cuttedanswer[i].equalsIgnoreCase("exakt")||cuttedanswer[i].equalsIgnoreCase("jeden")||cuttedanswer[i].equalsIgnoreCase("immer")) {
                 analysedanswer = 1; // case answer ja
             }
@@ -394,7 +397,7 @@ public class AlexaSkillSpeechlet
      * The first question presented to the skill user (entry point)
      */
     private SpeechletResponse getWelcomeResponse(){
-    	return askUserResponse("Willkommen bei der Notebookberatung durch Alexa! Ich werde dir eine Reihe an Fragen stellen und an Hand deiner Antworten werde ich dir eine Liste von zu dir passenden Laptops ausgeben! Sage start um zu beginnen.");
+    	return askUserResponse("Willkommen bei der Notebookberatung durch Alexa! Ich werde dir eine Reihe an Fragen stellen und an Hand deiner Antworten werde ich dir eine Liste von zu dir passenden Laptops ausgeben! Zu welcher der folgenden Nutzergruppen wird der Nutzer des Gerätes gehören? Ist er ein Student, ein Schüler, ein Senior, ein rein privater Nutzer, ein Produktivnutzer oder ein Gamer?");
        //    	return askUserResponse("<amazon:effect name=\"whispered\">Hey Leute</amazon:effect>, ich bin ein <phoneme alphabet=\"ipa\" ph=\"ËˆfÊŒni\">funny</phoneme> Nomen <phoneme alphabet=\"ipa\" ph=\"bÉ’t\">bot</phoneme>! Sag einen Satz und ich nenne dir die enthaltenen Nomen");
     }
 
