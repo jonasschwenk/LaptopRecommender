@@ -46,4 +46,5 @@ public class Gamer implements Nutzer{
 	        }
 	        return question;
 	}
+	public Gamer() {}
 }

@@ -18,4 +18,6 @@ public interface Nutzer{
 	public String selectQuestion();  //Ist dafür da die Frage auszuwählen, intern ist Antwort von counter abhängig
 	public String getLaptopFromAnswers(); //Wertet das Array "answers" aus, ausgabe ist intern von diesem abhängig
 	
+
+	
 }

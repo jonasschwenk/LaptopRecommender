@@ -48,5 +48,6 @@ public class PrivatNutzer implements Nutzer {
 	public String getLaptopFromAnswers() {
 		return "Test";
 	}
+	public PrivatNutzer() {}
 
 }

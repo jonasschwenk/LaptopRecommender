@@ -49,10 +49,12 @@ public class AlexaSkillSpeechlet
 	public static String userRequest;
 	String lastQuestion = "";
 	int minimumPrice = 370;
+	Nutzer nutzer = null;
+	/*
 	Schueler schueler1 = new Schueler();
 	Senioren senior1 = new Senioren();
 	Student student1 = new Student();
-	Gamer gamer1 = new Gamer();
+	Gamer gamer1 = new Gamer();*/
 	PrivatNutzer privatNutzer = new PrivatNutzer();
 	int groupCounter = 0;
 
@@ -104,13 +106,13 @@ public class AlexaSkillSpeechlet
             if(student) {
             	
             }else if(schueler) {
-            	
+            	nutzer = new Schueler();
             }else if(senior) {
-            	
+            	nutzer = new Senior();
             }else if(privatnutzer) {
-            	
+            	nutzer = new PrivatNutzer();
             }else if(gamer) {
-
+            	nutzer = new Gamer();
             }
         }
         if(counter == 0) {
