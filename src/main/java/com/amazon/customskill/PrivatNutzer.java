@@ -46,7 +46,30 @@ public class PrivatNutzer implements Nutzer {
 	        return question;
 	    }
 	public String getLaptopFromAnswers() {
-		return "Test";
+		switch (answerstoNumber(answers)) {
+		//noch alles Platzhalter
+		case 0: //nein, nein
+			return "0";
+		case 1: //nein, ja
+			return "1";
+		case 2: //ja, nein
+			return "2";
+		case 3: //ja, ja
+			return "3";
+		default:
+			return "fehler";
+		}
+		
+	}
+	public int answerstoNumber (int[] input) {
+		int output = 0;
+		int j = 1;
+		for (int i = input.length - 1; i<= 0 ; i--) {
+			output += input[i] * j;
+			j += 2;
+		}
+		return output;
+			
 	}
 	public PrivatNutzer() {}
 

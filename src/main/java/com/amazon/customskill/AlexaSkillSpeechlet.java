@@ -113,7 +113,6 @@ public class AlexaSkillSpeechlet
             	nutzer = new PrivatNutzer();
             }else if(gamer) {
             	nutzer = new Gamer();
-            }
         }
         if(counter == 0) {
         	nomen = analyze(userRequest);
