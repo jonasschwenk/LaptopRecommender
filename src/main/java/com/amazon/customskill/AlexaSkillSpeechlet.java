@@ -104,7 +104,7 @@ public class AlexaSkillSpeechlet
         }
         if(counter != 0) {
             if(student) {
-            	
+            	nutzer = new Student()
             }else if(schueler) {
             	nutzer = new Schueler();
             }else if(senior) {
