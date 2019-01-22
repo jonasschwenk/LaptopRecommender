@@ -49,6 +49,12 @@ public class AlexaSkillSpeechlet
 	public static String userRequest;
 	String lastQuestion ="";
 	int minimumPrice = 370;
+	Schueler schueler1 = new Schueler();
+	Senioren senior1 = new Senioren();
+	Student student1 = new Student();
+	Gamer gamer1 = new Gamer();
+	PrivatNutzer privatNutzer = new PrivatNutzer();
+	int groupCounter = 0;
 
     static Logger logger = LoggerFactory.getLogger(AlexaSkillSpeechlet.class);
 
@@ -89,7 +95,7 @@ public class AlexaSkillSpeechlet
 //            answers[counter - 1] = answerasint;
         if(lastQuestion.equalsIgnoreCase("Wie viel möchtest du maximal ausgeben?")) {
         	budget = stringToNumber(userRequest);
-        	System.out.println(budget);
+//        	System.out.println(budget);
         	lastQuestion = "";
         	if(budget < minimumPrice)
         		return askUserResponse("Dein Budget liegt unterhalb des Preises meiner Minimalkonfiguration! Daher werde ich dir keinen Laptop innerhalb deines Budegets empfehlen können. Möchtest du die Beratung dennoch Fortsetzen?");
@@ -150,26 +156,31 @@ public class AlexaSkillSpeechlet
     		student = true;
     		firstQuestion = "Wie viel möchtest du maximal ausgeben?";
     		counter ++;
+    		groupCounter = student1.counter;
     		break;
     	case "schüler":
     		schueler = true;
     		firstQuestion = "Wie viel möchtest du maximal ausgeben?";
     		counter ++;
+    		groupCounter = schueler1.counter;
     		break;
     	case "senior":
     		senior = true;
     		firstQuestion = "Wie viel möchtest du maximal ausgeben?";
     		counter ++;
+    		groupCounter = senior1.counter;
     		break;
     	case "gamer":
     		gamer = true;
     		firstQuestion = "Wie viel möchtest du maximal ausgeben?";
     		counter ++;
+    		groupCounter = gamer1.counter;
     		break;
     	case "privatnutzer":
     		privatnutzer = true;
     		firstQuestion = "Wie viel möchtest du maximal ausgeben?";
     		counter ++;
+    		groupCounter = privatNutzer.counter;
     		break;
     	default:
     		firstQuestion = "Bitte eine der folgenden Kategorien wählen: Privatnutzer, Student, Schüler, Gamer oder Senior!";
