@@ -45,9 +45,9 @@ public class AlexaSkillSpeechlet
 	public boolean senior = false;
 	public boolean gamer = false;
 	public int counter = 0;
-	public int fragenid=0;
+	public int fragenid = 0;
 	public static String userRequest;
-	String lastQuestion ="";
+	String lastQuestion = "";
 	int minimumPrice = 370;
 	Schueler schueler1 = new Schueler();
 	Senioren senior1 = new Senioren();
@@ -110,7 +110,7 @@ public class AlexaSkillSpeechlet
             }else if(privatnutzer) {
             	
             }else if(gamer) {
-            	
+
             }
         }
         if(counter == 0) {
