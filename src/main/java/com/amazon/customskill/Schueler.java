@@ -2,25 +2,66 @@ package com.amazon.customskill;
 
 public class Schueler {
 
-  private String selectQuestion(int i) {
+ private String selectQuestion(int i) {
+    String allAnswers = "";
+	  Boolean noMoreQuestions = false;
+	
+ private String selectQuestion(int i) {
         String question;
         switch(i){
             case 0:
                 question ="Ist der schüler oder die schülerin aelter als zwölf?";
-                counter ++;
+                counter = counter + 1;
                 break;
             case 1:
-                question = "Welche farbe bevorzügt er oder sie, weiß schwarz oder grau?";
-                counter ++;
-                break;
-        
-            default:
-                question = "Der Counter ist kleiner 0 oder größer 1!";
-                //counter = 0;
-                //The program doesn't stop at the moment rather it starts at question 1
-
-        }
+                question = "Welche farbe bevorzügt er oder sie, weiß oder schwarz?";
+                noMoreQuestions = true;
+                break;       
+            	}
         return question;
-    }
+ }
+
+ 
+  private String takeAnswer(String antwort) {
+	 	  String answers = "";
+	  switch(i){
+      case 0:
+          if(antwort.equals("ja")) {
+        	  answers ="ja";
+          }else {
+        	  answers = "nein";
+          }
+          counter = counter + 1;
+          break;
+      case 1:
+    	  if(antwort.equals("weiß")) {
+        	  allAnswers = answers + "weiß";
+          }else {
+        	  allAnswers = answers + "schwarz";
+          }
+          break;
+   }
+  return allAnswers;
+  }
+  
+  private String computerName() {
+	  String laptopName;
+    String noInput = "";
+    //String tipp = "";
+	  if(allAnswers.equals("jaweiß")) {
+		  laptopName = ""; //laptop name oder ausgabe
+		 }else if(allAnswers.equals("jaschwarz")) {
+			 laptopName = ""; //laptop name oder ausgabe
+		 }else if(allAnswers.equals("neinweiß")) {
+			 laptopName = ""; //laptop name oder ausgabe
+		 }else if(allAnswers.equals("neinschwarz")) {
+			 laptopName = ""; //laptop name oder ausgabe
+		 }else{
+      laptopName = noInput;
+			 System.out.println("error");
+		 }
+	  return laptopName;
+  }
+
 
 }
