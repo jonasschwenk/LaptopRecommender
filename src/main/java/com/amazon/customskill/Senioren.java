@@ -45,19 +45,21 @@ public class Senioren {
   }
   
   private String computerName() {
-	  String laptopName = "";
+	  String laptopName;
+	  String noInput = "";
 	  if(allAnswers.equals("jaja")) {
-		  return laptopName = ""; //laptop name oder ausgabe
+		  laptopName = ""; //laptop name oder ausgabe
 		 }else if(allAnswers.equals("janein")) {
-			 return laptopName = ""; //laptop name oder ausgabe
+		         laptopName = ""; //laptop name oder ausgabe
 		 }else if(allAnswers.equals("neinnein")) {
-			 return laptopName = ""; //laptop name oder ausgabe
+			 laptopName = ""; //laptop name oder ausgabe
 		 }else if(allAnswers.equals("neinja")) {
-			 return laptopName = ""; //laptop name oder ausgabe
+			 laptopName = ""; //laptop name oder ausgabe
 		 }else{
-			 System.out.println("error");
+		  laptopName = noInput;
+		  System.out.println("error");
 		 }
-	  
+	  return laptopName;
   }
 
 }
