@@ -34,14 +34,14 @@ public class Student {
 		 		 ++frageCounter ;
 		 		 break;
 		 		 
-    	case 3 : frage = "MÃ¶chtet sie ein leichter Laptop ?" ;
+    	case 3 : frage = "Möchte sie ein leichter Laptop ?" ;
 		 		 ++frageCounter ;
 		 		 break;
 		 		 
-    	case 4 : frage = "HÃ¤ttet si ein Konvertible  ?" ;
+    	case 4 : frage = "Hätte sie ein Convertible  ?" ;
 		 		 break;
 		 		 
-    	case 5 : frage = "MÃ¶chtet sie ein Touchscreen- Display ?" ;
+    	case 5 : frage = "Möchte sie ein Touchscreen- Display ?" ;
 		 		 ++frageCounter ;
 		 		 break;
 		 		 
@@ -55,16 +55,16 @@ public class Student {
     
     
     
-    public void takeAnswer (String antwort) {  // Diese Methode nimmt die Antworten des nutzer und bildet ei SuchAnfrage damit.
+    public void takeAnswer (String antwort) {  // Diese Methode nimmt die Antworten des nutzer und bildet eine Suchanfrage damit.
     	String konfiguration = "";
         String akkuLaufzeit = "";
         String gewicht = "" ;
-        String konvertible = "";
-        String touchScreem = "false";
+        String convertible = "";
+        String touchScreen = "false";
     	
     	switch (frageCounter ) {
     	
-    	case 0 : if (antwort.equals("Ya")) {
+    	case 0 : if (antwort.equalsIgnoreCase("ja")) {
     				konfiguration = "2";
     				++ frageCounter;
     			}else {
@@ -73,40 +73,40 @@ public class Student {
     			}
     			break;
     			
-    	case 1 :  if (antwort.equals("Ya")) {
+    	case 1 :  if (antwort.equalsIgnoreCase("ja")) {
 					konfiguration = "4";
     			  }
     			  break;
     			  
-    	case 2 : if (antwort.equals("Ya")) {
+    	case 2 : if (antwort.equalsIgnoreCase("ja")) {
     				akkuLaufzeit = ">= 7 Stunden";
 				 }else {
 					akkuLaufzeit = "< 7 Stunden" ;
 				 }
     			 break;
     			 
-    	case 3 : if (antwort.equals("Ya")) {
+    	case 3 : if (antwort.equalsIgnoreCase("ja")) {
     				gewicht = "<= 2 Kg";
 		 		 }else {
 		 			gewicht = "> 2 Kg" ;
 		 		 }
     			 break;
     			 
-    	case 4 :   if (antwort.equals("Ya")) {
-    					konvertible = "true";
+    	case 4 :   if (antwort.equalsIgnoreCase("ja")) {
+    					convertible = "true";
     					ausgabe = true;
     					
 		 		   }else {
-		 			   	konvertible = "false" ;
+		 			   	convertible = "false" ;
 		 			    ++ frageCounter;
 		 		   }
     			   break;
     			   
-    	case 5 : if (antwort.equals("Ya")) {
-    				 touchScreem = "true";
+    	case 5 : if (antwort.equalsIgnoreCase("ja")) {
+    				 touchScreen = "true";
     				 ausgabe = true;
 		 		 }else {
-		 			 touchScreem = "false" ;
+		 			 touchScreen = "false" ;
 		 			ausgabe = true;
 		 		 }
     			 break;
@@ -115,12 +115,12 @@ public class Student {
     	
     	}
     	
-    	completteAnfrage = konfiguration+","+akkuLaufzeit+","+gewicht+","+konvertible+","+touchScreem ;
+    	completteAnfrage = konfiguration+","+akkuLaufzeit+","+gewicht+","+convertible+","+touchScreen ;
     }
     
 
     
-    public void ListAusfÃ¼llen() { // Diese Methode fÃ¼llt unsere Database  einfach . 
+    public void ListAusfuellen() { // Diese Methode fÃ¼llt unsere Database  einfach . 
     	
     	/*laptopDataBase[i][0] = "Konfiguration,Akkulaufzeit,Gewicht,Konvertible,Touchscreem" ;       //laptopDataBase[i][1] = "Notebook" ;
     	 * Konfiguration 1 : 4 GB Ram, i3, 256 SSD, ab 370 Euro
@@ -128,15 +128,15 @@ public class Student {
          * Konfiguration 1 : 8 GB Ram, i5, 256 SSD, 1 TeraBab  HDD, ab 1000 Euro
          * Konfiguration 1 : 16 GB Ram, i7, 256 SSD,2 TeraB, ab 1500 Euro */
     	
-    laptopDataBase[1][0] = "1,>= 7 Stunden,<= 2 Kg,true,false"  ;     laptopDataBase[1][1] = "..."  ;
-    laptopDataBase[2][0] = "1,< 7 Stunden,<= 2 Kg,true,false"  ;      laptopDataBase[2][1] = "..."  ;
-    laptopDataBase[3][0] = "1,>= 7 Stunden,> 2 Kg,true,false" ;		  laptopDataBase[3][1] = "..." ;
-    laptopDataBase[4][0] = "1,< 7 Stunden,> 2 Kg,true,false" ;	      laptopDataBase[4][1] = "..." ;
-    laptopDataBase[5][0] = "1,>= 7 Stunden,<= 2 Kg,false,true" ;      laptopDataBase[5][1] = "..." ;
-    laptopDataBase[6][0] = "1,< 7 Stunden,> 2 Kg,false,true" ;        laptopDataBase[6][1] = "..." ;
-    laptopDataBase[7][0] = "1,< 7 Stunden,<= 2 Kg,false,true"  ;      laptopDataBase[7][1] = "..."  ;
-    laptopDataBase[8][0] = "1,>= 7 Stunden,<= 2 Kg,false,true";       laptopDataBase[8][1] = "...";
-    laptopDataBase[9][0] = "1,>= 7 Stunden,<= 2 Kg,false,false" ;     laptopDataBase[9][1] = "..." ;
+    laptopDataBase[1][0] = "1,>= 7 Stunden,<= 2 Kg,true,false"  ;     laptopDataBase[1][1] =  "..." ;
+    laptopDataBase[2][0] = "1,< 7 Stunden,<= 2 Kg,true,false"  ;      laptopDataBase[2][1] =  "..." ;
+    laptopDataBase[3][0] = "1,>= 7 Stunden,> 2 Kg,true,false" ;		  laptopDataBase[3][1] =  "..." ;
+    laptopDataBase[4][0] = "1,< 7 Stunden,> 2 Kg,true,false" ;	      laptopDataBase[4][1] =  "..." ;
+    laptopDataBase[5][0] = "1,>= 7 Stunden,<= 2 Kg,false,true" ;      laptopDataBase[5][1] =  "..." ;
+    laptopDataBase[6][0] = "1,< 7 Stunden,> 2 Kg,false,true" ;        laptopDataBase[6][1] =  "..." ;
+    laptopDataBase[7][0] = "1,< 7 Stunden,<= 2 Kg,false,true"  ;      laptopDataBase[7][1] =  "..." ;
+    laptopDataBase[8][0] = "1,>= 7 Stunden,<= 2 Kg,false,true";       laptopDataBase[8][1] =  "..."	;
+    laptopDataBase[9][0] = "1,>= 7 Stunden,<= 2 Kg,false,false" ;     laptopDataBase[9][1] =  "..." ;
     laptopDataBase[10][0] = "1,< 7 Stunden,> 2 Kg,false,false," ;     laptopDataBase[10][1] = "..." ;
     laptopDataBase[11][0] = "1,< 7 Stunden,<= 2 Kg,false,false" ;     laptopDataBase[11][1] = "..." ;
     laptopDataBase[12][0] = "1,>= 7 Stunden,<= 2 Kg,false,false" ;    laptopDataBase[12][1] = "..." ;
@@ -167,7 +167,7 @@ public class Student {
     laptopDataBase[33][0] = "4,>= 7 Stunden,<= 2 Kg,false,false" ;    laptopDataBase[33][1] = "..."  ;
     laptopDataBase[34][0] = "4,< 7 Stunden,> 2 Kg,false,false," ;     laptopDataBase[34][1] = "..."  ;
     laptopDataBase[35][0] = "4,< 7 Stunden,<= 2 Kg,false,false" ;     laptopDataBase[35][1] = "..."  ;
-    laptopDataBase[36][0] = "4,>= 7 Stunden,<= 2 Kg,false,false" ;    laptopDataBase[36][1] = "..."  ;      // die Tabelle ist komplett ausgefÃ¼llt
+    laptopDataBase[36][0] = "4,>= 7 Stunden,<= 2 Kg,false,false" ;    laptopDataBase[36][1] = "..."  ;      // die Tabelle ist komplett ausgefuellt
     }
     
      
@@ -181,7 +181,7 @@ public class Student {
      		}
      	}
      	
-     	String aussage1= "Der "+antwort+ " ist fÃ¼r sie ein guter Auswahl. AuÃŸerdem emphele ich Ihnen auch ein Notebook Tasche zu kaufen" ;
+     	String aussage1= "Der "+antwort+ " ist für sie ein guter Auswahl. Außerdem empfele ich Ihnen auch eine Notebook Tasche zu kaufen" ;
      	return aussage1;
      }
 
