@@ -8,11 +8,17 @@ public class PrivatNutzer implements Nutzer {
 	
 	protected String completteAnfrage = ""; 
 	private int frageCounter = 0;
-	private boolean noMoreQuestion = false;
+	
 	private String convertible = "true";
 	private String laufwerk = "true";
 	private String blueRayLaufwerk = "false";
 	
+	private boolean noMoreQuestions = false;
+	
+	public boolean getNoMoreQuestions() {
+		return noMoreQuestions;
+	}
+		
 	public PrivatNutzer() {
 		listAusfuellen();
 	}
@@ -34,16 +40,15 @@ public class PrivatNutzer implements Nutzer {
         String question = "";;
         switch(frageCounter){
             case 1:
-                question ="Möchte diese Person ein Covertible haben, sprich soll man die Tastatur abnehmen können?";
+                question ="Moechte diese Person ein Covertible haben, sprich soll man die Tastatur abnehmen kann?";
                 frageCounter ++;
                 break;
             case 2:
-                question = "Benötigt die Person ein Laufwerk?";
+                question = "Benoetigt die Person ein Laufwerk?";
                 frageCounter ++;
                 break;
             case 3: 
-            	question = "Möchtet sie ein Blue Ray?";
-            	noMoreQuestion = true;
+            	question = "Moechtet sie ein Blue Ray?";
             	break;
         
             default: break;
@@ -54,20 +59,33 @@ public class PrivatNutzer implements Nutzer {
         return question;
     }
 	
-	public String takeAnswers(int answer) {
+	public void takeAnswer(int answerAsInt) {
 		//initialisiert mit standartwerten
 
-		switch(frageCounter - 1) {
+		switch(frageCounter) {
 			case 0:
-				(answer == 1) ? convertible = "true" : convertible = "false"; break;
-			case 1: 
-				(answer == 1) ? laufwerk = "true" : laufwerk = "false"; noMoreQuestion = true; break;
+				if (answerAsInt == 1)
+					convertible = "true";
+				else 
+					convertible = "false";
+				break;
+			case 1:
+				if (answerAsInt == 1)
+					laufwerk = "true";
+				else 
+					laufwerk = "false";
+				noMoreQuestions = true;
+				break;
 			case 2:
-				(answer == 1) ? blueRayLaufwerk = "true" : blueRayLaufwerk = "false"; break;
+				if (answerAsInt == 1)
+					blueRayLaufwerk = "true";
+				else 
+					blueRayLaufwerk = "false";
+				noMoreQuestions = true;
+				break;
 			default : break;
-		}
+		}	
 		completteAnfrage = convertible + "," + laufwerk + "," + blueRayLaufwerk;
-		return completteAnfrage;
 	}
 	
 	public void listAusfuellen() {
@@ -83,12 +101,10 @@ public class PrivatNutzer implements Nutzer {
 	
 	public String getLaptopFromAnswers() {
 		//array durchgehen und mit anfrage vergleichen
-		
 		for (int i = 0 ; i <= laptopDataBase.length ; i++ ) 
 			if (completteAnfrage.equals(laptopDataBase[i][0])){
 				return laptopDataBase[i][1];		
 			}
 		return "error";
 	}
-	public PrivatNutzer() {}
 }
