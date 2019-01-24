@@ -1,6 +1,8 @@
 package com.amazon.customskill;
 
-public class Gamer implements Nutzer{//protected final int NumberOfQuestions = 3;
+public class Gamer implements Nutzer{
+	
+	
 	//initialisiert mit standartwerten
 	String leuchten="true";
 	String aktuell="false";
@@ -18,39 +20,42 @@ public class Gamer implements Nutzer{//protected final int NumberOfQuestions = 3
 		this.frageCounter = frageCounter;
 	}
 	
-	public String takeAnswers(int answer) {
+	private boolean noMoreQuestions = false;
+	
+	public boolean getNoMoreQuestions() {
+		return noMoreQuestions;
+	}
+	
+	public void takeAnswer(int answerAsInt) {
 
-		switch(frageCounter - 1) {
+		switch(frageCounter) {
 			case 0:
-				if (answer == 1)
+				if (answerAsInt == 1)
 					leuchten = "true";
 				else 
 					leuchten = "false";
 				break;
-				//(answer == 1) ? leuchten = "true"; : leuchten = "false"; break;
 			case 1:
-				if (answer == 1)
+				if (answerAsInt == 1)
 					aktuell = "true";
 				else 
 					aktuell = "false";
 				break;
-				//(answer == 1) ? aktuell = "true"; : aktuell = "false"; break;
 			case 2:
-				if (answer == 1)
+				if (answerAsInt == 1)
 					bildschirm = "klein";
 				else 
 					bildschirm = "gross";
+				noMoreQuestions = true;
 				break;
-				//(answer == 1) ? bildschirm = "gross"; : bildschirm = "klein"; break;
 			default : break;
 		}
 		completteAnfrage = leuchten + "," + aktuell + "," + bildschirm;
-		return completteAnfrage;
 	}
 	
 	public String getLaptopFromAnswers() {
 		//array durchgehen und mit anfrage vergleichen
-		for (int i = 0 ; i <= laptopDataBase.length ; i++ )
+		for (int i = 0 ; i < laptopDataBase.length ; i++ )
 			if (completteAnfrage.equals(laptopDataBase[i][0]))
 				return laptopDataBase[i][1];
 		return "error";
@@ -71,44 +76,27 @@ public class Gamer implements Nutzer{//protected final int NumberOfQuestions = 3
 	        String question;
 	        switch(frageCounter){
 	            case 0:
-	                question ="Möchtest du eine beleuchtete Tastatur haben?";
+	                question ="Moechtest du eine beleuchtete Tastatur haben?";
 	                frageCounter++;
 	                break;
 	            case 1:
-	                question = "Möchtest du auch aktuelle Spiele spielen?";
+	                question = "Moechtest du auch aktuelle Spiele spielen?";
 	                frageCounter++;
 	                break;
 	        
 	            case 2:
-	            	question = "Möchtest du einen großen Bildschirm haben?";
+	            	question = "Moechtest du einen grossen Bildschirm haben?";
 	            	frageCounter++;
 	            	break;
 	            default:
-	                question = "Der frageCounter ist kleiner 0 oder größer 2!";
+	                question = "Der frageCounter ist kleiner 0 oder groesser 2!";
 	                //frageCounter = 0;
 	                //The program doesn't stop at the moment rather it starts at question 1
 
 	        }
 	        return question;
 	}
-	public 
-	
-//	//macht aus binären antworten eine Nummer, um caseswitch verwenden zu können
-//	public int answerstoNumber (int[] input) {
-//		int output = 0;
-//		int j = 1;
-//		for (int i = input.length - 1; i<= 0 ; i--) {
-//			output += input[i] * j;
-//			j += 2;
-//		}
-//		return output;
-//			
-//	}
-	
-	
-	
-	
-	Gamer() {
+	public Gamer() {
 		listAusfuellen();
 	}
 }
