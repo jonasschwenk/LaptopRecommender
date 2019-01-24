@@ -1,8 +1,8 @@
 package com.amazon.customskill;
 
-public class Senioren {
+public class Senioren implements Nutzer {
 	private String[][] laptopDataBase = new String[4][2];
-	String allAnswers = "";
+	private String allAnswers = "";
 	Boolean noMoreQuestions = false;
 	int frageCounter = 0;
 	
