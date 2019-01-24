@@ -14,7 +14,7 @@ public Senioren(){
         switch(frageCounter){
             case 0:
                 question ="Möchtet er oder sie der laptop auch unterwegs oder im urlaub benutzen?";
-                counter = counter + 1;
+                frageCounter = frageCounter + 1;
                 break;
             case 1:
                 question = "Hat der senior oder die seniorin Sehprobleme?";
@@ -36,7 +36,7 @@ public Senioren(){
      }else {
    	  answer0 = "> 2kg";
      }
-     counter = counter + 1;
+     frageCounter = frageCounter + 1;
      break;
  case 1:
 	  if(antwort.equalsIgnoreCase("ja")) {
@@ -56,7 +56,7 @@ return allAnswers;
   	
   laptopDataBase[0][0] = "<= 2kg,grosses bildschirm"  ;     laptopDataBase[1][1] =  "..." ;
   laptopDataBase[1][0] = "<= 2kg,normales bildschirm" ;     laptopDataBase[2][1] =  "..." ;
-  laptopDataBase[2][0] = "> 2kg,grosses bildschirm" ;		laptopDataBase[3][1] =  "..." ;
+  laptopDataBase[2][0] = "> 2kg,grosses bildschirm" ;	    laptopDataBase[3][1] =  "..." ;
   laptopDataBase[3][0] = "> 2kg,normales bildschirm ;	    laptopDataBase[4][1] =  "..." ;   // die Tabelle ist komplett ausgefuellt
   }
   
