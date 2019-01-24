@@ -1,62 +1,52 @@
 package com.amazon.customskill;
 
-import org.apache.xpath.operations.String;
-
-public class Gamer implements Nutzer{
-	protected final int minimalPrice = 899;
-	//protected final int NumberOfQuestions = 3;
+public class Gamer implements Nutzer{//protected final int NumberOfQuestions = 3;
+	//initialisiert mit standartwerten
+	String leuchten="true";
+	String aktuell="false";
+	String bildschirm = "false";
 	
 	protected String[][] laptopDataBase = new String [8][2];
 	
 	protected String completteAnfrage = ""; 
 	private int frageCounter = 0;
-	
-	//private int[] answers = new int[2];
-	
-	public int getfrageCounter() {
+		
+	public int getFrageCounter() {
 		return frageCounter;
 	}
-	public void setfrageCounter(int frageCounter) {
+	public void setFrageCounter(int frageCounter) {
 		this.frageCounter = frageCounter;
 	}
-//	public int getAnswers (int index) {
-//		return answers[index];
-//	}
-//	public void setAnswers (int index, int value) {
-//		answers[index] = value;
-//	}
 	
 	public String takeAnswers(int answer) {
-		//initialisiert mit standartwerten
-		String leuchten="true";
-		String aktuell="false";
-		String bildschirm = "false";
-		switch(frageCountner - 1) {
+
+		switch(frageCounter - 1) {
 			case 0:
-				(answer == 1) ? leuchten = "true" : leuchten = "false"; break;
+				(answer == 1) ? leuchten = "true"; : leuchten = "false"; break;
 			case 1: 
-				(answer == 1) ? aktuell = "true" : aktuell = "false"; break;
+				(answer == 1) ? aktuell = "true"; : aktuell = "false"; break;
 			case 2:
-				(answer == 1) ? bildschirm = "gross" : bildschirm = "klein"; break;
+				(answer == 1) ? bildschirm = "gross"; : bildschirm = "klein"; break;
 			default : break;
 		}
 		completteAnfrage = leuchten + "," + aktuell + "," + bildschirm;
-		
+		return completteAnfrage;
 	}
 	
 	public String getLaptopFromAnswers() {
 		//array durchgehen und mit anfrage vergleichen
-		for (int i = 0 ; i <= laptopDataBase.length ; i++ ) 
-			if completteAnfrage.equals(laptopDataBase[i][0])
-				return laptopDataBase[i][1];		
+		for (int i = 0 ; i <= laptopDataBase.length ; i++ )
+			if (completteAnfrage.equals(laptopDataBase[i][0]))
+				return laptopDataBase[i][1];
+		return "error";
 	}
 	
 	public void listAusfuellen() {
-		laptopDateBase[0][0] = "false,false,klein";	laptopDataBase[0][1]="...";
+		laptopDataBase[0][0] = "false,false,klein";	laptopDataBase[0][1]="...";
 		laptopDataBase[1][0] = "false,true,klein"; 	laptopDataBase[1][1]="...";
 		laptopDataBase[2][0] = "true,false,klein";	laptopDataBase[2][1]="...";
 		laptopDataBase[3][0] = "true,true,klein";	laptopDataBase[3][1]="...";
-		laptopDateBase[4][0] = "false,false,gross";	laptopDataBase[4][1]="...";
+		laptopDataBase[4][0] = "false,false,gross";	laptopDataBase[4][1]="...";
 		laptopDataBase[5][0] = "false,true,gross"; 	laptopDataBase[5][1]="...";
 		laptopDataBase[6][0] = "true,false,gross";	laptopDataBase[6][1]="...";
 		laptopDataBase[7][0] = "true,true,gross";	laptopDataBase[7][1]="...";
@@ -65,7 +55,7 @@ public class Gamer implements Nutzer{
 	public String selectQuestion() {
 	        String question;
 	        switch(frageCounter){
-	            case 0
+	            case 0:
 	                question ="Möchtest du eine beleuchtete Tastatur haben?";
 	                frageCounter++;
 	                break;
