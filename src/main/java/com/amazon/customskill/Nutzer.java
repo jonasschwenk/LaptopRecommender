@@ -9,7 +9,7 @@ public interface Nutzer {
 
 	// getter und setter
 	public int getCounter();
-
+	public boolean getNoMoreQuestions();
 	public void setFrageCounter(int frageCounter);
 
 	// Methoden
@@ -20,7 +20,4 @@ public interface Nutzer {
 	public void listAusfuellen();
 
 	public void takeAnswer(int answerAsInt);
-
-	public boolean getNoMoreQuestions();
-
 }
