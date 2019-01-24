@@ -1,75 +1,109 @@
 package com.amazon.customskill;
 
+import org.apache.xpath.operations.String;
+
 public class Gamer implements Nutzer{
 	protected final int minimalPrice = 899;
-	protected final int NumberOfQuestions = 3;
+	//protected final int NumberOfQuestions = 3;
 	
+	protected String[][] laptopDataBase = new String [8][2];
 	
-	private int counter = 0;
+	protected String completteAnfrage = ""; 
+	private int frageCounter = 0;
 	
-	private int[] answers = new int[NumberOfQuestions];
+	//private int[] answers = new int[2];
 	
-	public int getCounter() {
-		return counter;
+	public int getfrageCounter() {
+		return frageCounter;
 	}
-	public void setCounter(int counter) {
-		this.counter = counter;
+	public void setfrageCounter(int frageCounter) {
+		this.frageCounter = frageCounter;
 	}
-	public int getAnswers (int index) {
-		return answers[index];
-	}
-	public void setAnswers (int index, int value) {
-		answers[index] = value;
-	}
+//	public int getAnswers (int index) {
+//		return answers[index];
+//	}
+//	public void setAnswers (int index, int value) {
+//		answers[index] = value;
+//	}
 	
-	public String getLaptopFromAnswers() {
-		switch (answerstoNumber(answers)) {
-		//noch alles Platzhalter
-		case 0: //nein, nein
-			return "0";
-		case 1: //nein, ja
-			return "1";
-		case 2: //ja, nein
-			return "2";
-		case 3: //ja, ja
-			return "3";
-		default:
-			return "fehler";
+	public String takeAnswers(int answer) {
+		//initialisiert mit standartwerten
+		String leuchten="true";
+		String aktuell="false";
+		String bildschirm = "false";
+		switch(frageCountner - 1) {
+			case 0:
+				(answer == 1) ? leuchten = "true" : leuchten = "false"; break;
+			case 1: 
+				(answer == 1) ? aktuell = "true" : aktuell = "false"; break;
+			case 2:
+				(answer == 1) ? bildschirm = "gross" : bildschirm = "klein"; break;
+			default : break;
 		}
+		completteAnfrage = leuchten + "," + aktuell + "," + bildschirm;
 		
 	}
 	
+	public String getLaptopFromAnswers() {
+		//array durchgehen und mit anfrage vergleichen
+		for (int i = 0 ; i <= laptopDataBase.length ; i++ ) 
+			if completteAnfrage.equals(laptopDataBase[i][0])
+				return laptopDataBase[i][1];		
+	}
+	
+	public void listAusfuellen() {
+		laptopDateBase[0][0] = "false,false,klein";	laptopDataBase[0][1]="...";
+		laptopDataBase[1][0] = "false,true,klein"; 	laptopDataBase[1][1]="...";
+		laptopDataBase[2][0] = "true,false,klein";	laptopDataBase[2][1]="...";
+		laptopDataBase[3][0] = "true,true,klein";	laptopDataBase[3][1]="...";
+		laptopDateBase[4][0] = "false,false,gross";	laptopDataBase[4][1]="...";
+		laptopDataBase[5][0] = "false,true,gross"; 	laptopDataBase[5][1]="...";
+		laptopDataBase[6][0] = "true,false,gross";	laptopDataBase[6][1]="...";
+		laptopDataBase[7][0] = "true,true,gross";	laptopDataBase[7][1]="...";
+	}
+	//
 	public String selectQuestion() {
 	        String question;
-	        switch(counter){
-	            case 1:
-	                question ="Möchtest du eine beleuchtete Tastatur haben?";
-	                counter ++;
+	        switch(frageCounter){
+	            case 0
+	                question ="MÃ¶chtest du eine beleuchtete Tastatur haben?";
+	                frageCounter++;
 	                break;
-	            case 2:
-	                question = "Möchtest du auch aktuelle Spiele spielen?";
-	                counter ++;
+	            case 1:
+	                question = "MÃ¶chtest du auch aktuelle Spiele spielen?";
+	                frageCounter++;
 	                break;
 	        
+	            case 2:
+	            	question = "MÃ¶chtest du einen groÃŸen Bildschirm haben?";
+	            	frageCounter++;
+	            	break;
 	            default:
-	                question = "Der Counter ist kleiner 1 oder größer 2!";
-	                //counter = 0;
+	                question = "Der frageCounter ist kleiner 0 oder grÃ¶ÃŸer 2!";
+	                //frageCounter = 0;
 	                //The program doesn't stop at the moment rather it starts at question 1
 
 	        }
 	        return question;
 	}
+	public 
 	
-	//macht aus binären antworten eine Nummer, um caseswitch verwenden zu können
-	public int answerstoNumber (int[] input) {
-		int output = 0;
-		int j = 1;
-		for (int i = input.length - 1; i<= 0 ; i--) {
-			output += input[i] * j;
-			j += 2;
-		}
-		return output;
-			
+//	//macht aus binÃ¤ren antworten eine Nummer, um caseswitch verwenden zu kÃ¶nnen
+//	public int answerstoNumber (int[] input) {
+//		int output = 0;
+//		int j = 1;
+//		for (int i = input.length - 1; i<= 0 ; i--) {
+//			output += input[i] * j;
+//			j += 2;
+//		}
+//		return output;
+//			
+//	}
+	
+	
+	
+	
+	public Gamer() {
+		listAusfuellen();
 	}
-	public Gamer() {}
 }
