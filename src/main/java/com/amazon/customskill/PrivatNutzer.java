@@ -2,75 +2,91 @@ package com.amazon.customskill;
 
 public class PrivatNutzer implements Nutzer {
 	protected final int minimalPrice = 899;
-	protected final int NumberOfQuestions = 3;
+	//protected final int NumberOfQuestions = 3;
 	
-	private int counter = 0;
-	private int[] answers = new int[NumberOfQuestions];
+	protected String[][] laptopDataBase = new String [8][2];
 	
-	public int getCounter() {
-		return counter;
-	}
-	public void setCounter(int counter) {
-		this.counter = counter;
-	}
-	public int getAnswers (int index) {
-		return answers[index];
-	}
-	public void setAnswers (int index, int value){
-		answers[index] = value;
+	protected String completteAnfrage = ""; 
+	private int frageCounter = 0;
+	private boolean noMoreQuestion = false;
+	
+	public PrivatNutzer() {
+		listAusfuellen();
 	}
 	
+	public int getfrageCounter() {
+		return frageCounter;
+	}
+	public void setfrageCounter(int frageCounter) {
+		this.frageCounter = frageCounter;
+	}
+//	public int getAnswers (int index) {
+//		return answers[index];
+//	}
+//	public void setAnswers (int index, int value) {
+//		answers[index] = value;
+//	}
 	
 	public String selectQuestion() {
-	        String question;
-	        switch(counter){
-	            case 1:
-	                question ="Möchtest du ein Covertible haben, sprich soll man die Tastatur abnehmen können?";
-	                counter ++;
-	                break;
-	            case 2:
-	                question = "Benötigst du ein Laufwerk?";
-	                counter ++;
-	                break;
-	            case 3: 
-	            	question = "Welche Art von Laufwerk? DVD oder Blue Ray?";
-	            	counter ++;
-	            	break;
-	        
-	            default:
-	                question = "Der Counter ist kleiner 1 oder größer 2!";
-	                //counter = 0;
-	                //The program doesn't stop at the moment rather it starts at question 1
+        String question;
+        switch(frageCounter){
+            case 1:
+                question ="MÃ¶chte diese Person ein Covertible haben, sprich soll man die Tastatur abnehmen kÃ¶nnen?";
+                frageCounter ++;
+                break;
+            case 2:
+                question = "BenÃ¶tigt die Person ein Laufwerk?";
+                frageCounter ++;
+                break;
+            case 3: 
+            	question = "MÃ¶chtet sie ein Blue Ray?";
+            	noMoreQuestion = true;
+            	break;
+        
+            default: break;
+                //counter = 0;
+                //The program doesn't stop at the moment rather it starts at question 1
 
-	        }
-	        return question;
-	    }
-	public String getLaptopFromAnswers() {
-		switch (answerstoNumber(answers)) {
-		//noch alles Platzhalter
-		case 0: //nein, nein
-			return "0";
-		case 1: //nein, ja
-			return "1";
-		case 2: //ja, nein
-			return "2";
-		case 3: //ja, ja
-			return "3";
-		default:
-			return "fehler";
+        }
+        return question;
+    }
+	
+	public String takeAnswers(int answer) {
+		//initialisiert mit standartwerten
+		String convertible = "true";
+		String laufwerk = "true";
+		String blueRayLaufwerk = "false";
+		switch(frageCountner - 1) {
+			case 0:
+				(answer == 1) ? convertible = "true" : convertible = "false"; break;
+			case 1: 
+				(answer == 1) ? laufwerk = "true" : laufwerk = "false"; noMoreQuestion = true; break;
+			case 2:
+				(answer == 1) ? blueRayLaufwerk = "true" : blueRayLaufwerk = "false"; break;
+			default : break;
 		}
+		completteAnfrage = convertible + "," + laufwerk + "," + blueRayLaufwerk;
 		
 	}
-	public int answerstoNumber (int[] input) {
-		int output = 0;
-		int j = 1;
-		for (int i = input.length - 1; i<= 0 ; i--) {
-			output += input[i] * j;
-			j += 2;
-		}
-		return output;
-			
+	
+	public void listAusfuellen() {
+		laptopDateBase[0][0] = "true,true,false";	laptopDataBase[0][1]="...";
+		laptopDataBase[1][0] = "true,false,true"; 	laptopDataBase[1][1]="...";
+		laptopDataBase[2][0] = "false,true,true";	laptopDataBase[2][1]="...";
+		laptopDataBase[3][0] = "false,false,true";	laptopDataBase[3][1]="...";
+		laptopDateBase[4][0] = "false,true,false";	laptopDataBase[4][1]="...";
+		laptopDataBase[5][0] = "true,false,false"; 	laptopDataBase[5][1]="...";
+		laptopDataBase[6][0] = "true,true,true";	laptopDataBase[6][1]="...";
+		laptopDataBase[7][0] = "false,false,false";	laptopDataBase[7][1]="...";   // Die Tabelle ist komplett ausgefÃ¼llt
 	}
-	public PrivatNutzer() {}
+	
+	public String getLaptopFromAnswers() {
+		//array durchgehen und mit anfrage vergleichen
+		
+		for (int i = 0 ; i <= laptopDataBase.length ; i++ ) 
+			if completteAnfrage.equals(laptopDataBase[i][0]){
+				return laptopDataBase[i][1];		
+			}
+	}
 
 }
