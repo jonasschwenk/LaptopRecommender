@@ -2,10 +2,15 @@ package com.amazon.customskill;
 
 public class Student {
   
-  private String[][] laptopDataBase = new String[37][2]  ;    // Tabelle von 37 Zeilen und 7 Spalte. Das ist unsere DataBase für den Laptop
+  private String[][] laptopDataBase = new String[37][2]  ;    // Tabelle von 37 Zeilen und 7 Spalte. Das ist unsere DataBase fÃ¼r den Laptop
     private int frageCounter  = 0 ;
     private String completteAnfrage = "";   
-    private Boolean ausgabe = false ; // Variable, die sagt wenn man die Methode für die Ausgabe 
+    private Boolean ausgabe = false ; // Variable, die sagt wenn man die Methode fÃ¼r die Ausgabe 
+	
+	 public boolean getNoMoreQuestions() {
+		    	
+		return noMoreQuestion;
+	 }
     
     public String selectQuestion (String antwort) {
     	
@@ -34,14 +39,14 @@ public class Student {
 		 		 ++frageCounter ;
 		 		 break;
 		 		 
-    	case 3 : frage = "M�chte sie ein leichter Laptop ?" ;
+    	case 3 : frage = "Möchte sie ein leichter Laptop ?" ;
 		 		 ++frageCounter ;
 		 		 break;
 		 		 
-    	case 4 : frage = "H�tte sie ein Convertible  ?" ;
+    	case 4 : frage = "Hätte sie ein Convertible  ?" ;
 		 		 break;
 		 		 
-    	case 5 : frage = "M�chte sie ein Touchscreen- Display ?" ;
+    	case 5 : frage = "Möchte sie ein Touchscreen- Display ?" ;
 		 		 ++frageCounter ;
 		 		 break;
 		 		 
@@ -120,7 +125,7 @@ public class Student {
     
 
     
-    public void ListAusfuellen() { // Diese Methode füllt unsere Database  einfach . 
+    public void ListAusfuellen() { // Diese Methode fÃ¼llt unsere Database  einfach . 
     	
     	/*laptopDataBase[i][0] = "Konfiguration,Akkulaufzeit,Gewicht,Konvertible,Touchscreem" ;       //laptopDataBase[i][1] = "Notebook" ;
     	 * Konfiguration 1 : 4 GB Ram, i3, 256 SSD, ab 370 Euro
@@ -181,7 +186,7 @@ public class Student {
      		}
      	}
      	
-     	String aussage1= "Der "+antwort+ " ist f�r sie ein guter Auswahl. Au�erdem empfele ich Ihnen auch eine Notebook Tasche zu kaufen" ;
+     	String aussage1= "Der "+antwort+ " ist für sie ein guter Auswahl. Außerdem empfele ich Ihnen auch eine Notebook Tasche zu kaufen" ;
      	return aussage1;
      }
 
