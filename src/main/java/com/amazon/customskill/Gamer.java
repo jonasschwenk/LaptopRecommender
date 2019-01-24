@@ -22,11 +22,26 @@ public class Gamer implements Nutzer{//protected final int NumberOfQuestions = 3
 
 		switch(frageCounter - 1) {
 			case 0:
-				(answer == 1) ? leuchten = "true"; : leuchten = "false"; break;
-			case 1: 
-				(answer == 1) ? aktuell = "true"; : aktuell = "false"; break;
+				if (answer == 1)
+					leuchten = "true";
+				else 
+					leuchten = "false";
+				break;
+				//(answer == 1) ? leuchten = "true"; : leuchten = "false"; break;
+			case 1:
+				if (answer == 1)
+					aktuell = "true";
+				else 
+					aktuell = "false";
+				break;
+				//(answer == 1) ? aktuell = "true"; : aktuell = "false"; break;
 			case 2:
-				(answer == 1) ? bildschirm = "gross"; : bildschirm = "klein"; break;
+				if (answer == 1)
+					bildschirm = "klein";
+				else 
+					bildschirm = "gross";
+				break;
+				//(answer == 1) ? bildschirm = "gross"; : bildschirm = "klein"; break;
 			default : break;
 		}
 		completteAnfrage = leuchten + "," + aktuell + "," + bildschirm;
@@ -93,7 +108,7 @@ public class Gamer implements Nutzer{//protected final int NumberOfQuestions = 3
 	
 	
 	
-	public Gamer() {
+	Gamer() {
 		listAusfuellen();
 	}
 }
