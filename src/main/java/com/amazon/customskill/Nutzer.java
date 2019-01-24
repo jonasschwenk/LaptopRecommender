@@ -8,9 +8,7 @@ public interface Nutzer {
 	boolean noMoreQuestions = false;
 
 	// getter und setter
-	public int getCounter();
 	public boolean getNoMoreQuestions();
-	public void setFrageCounter(int frageCounter);
 
 	// Methoden
 	public String selectQuestion(); // Ist dafür da die Frage auszuwählen, intern ist Antwort von counter abhängig
