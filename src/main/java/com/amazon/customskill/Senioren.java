@@ -4,10 +4,11 @@ public class Senioren {
 	
 	String allAnswers = "";
 	Boolean noMoreQuestions = false;
+	int frageCounter = 0;
 	
- private String selectQuestion(int i) {
+ private String selectQuestion() {
         String question;
-        switch(i){
+        switch(frageCounter){
             case 0:
                 question ="Möchtet er oder sie der laptop auch unterwegs oder im urlaub benutzen?";
                 counter = counter + 1;
@@ -23,24 +24,26 @@ public class Senioren {
 
  
   private String takeAnswer(String antwort) {
-	 	  String answers = "";
-	  switch(i){
+	 	  String answer0 = "";
+	  	  String answer1 = "";
+	  switch(frageCounter){
       case 0:
-          if(antwort.equals("ja")) {
-        	  answers ="ja";
+          if(antwort.equalsIgnoreCase("ja")) {
+        	  answer0 ="ja";
           }else {
-        	  answers = "nein";
+        	  answer0 = "nein";
           }
           counter = counter + 1;
           break;
       case 1:
-    	  if(antwort.equals("ja")) {
-        	  allAnswers = answers + "ja";
+    	  if(antwort.equalsIgnoreCase("ja")) {
+        	  answer1 = "ja";
           }else {
-        	  allAnswers = answers + "nein";
+        	  answer1 = "nein";
           }
           break;
    }
+	  allAnswers = answer0 + answer1;
   return allAnswers;
   }
   
