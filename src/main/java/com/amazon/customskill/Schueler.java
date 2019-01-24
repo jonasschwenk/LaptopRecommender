@@ -4,7 +4,7 @@ public class Schueler implements Nutzer {
 	private int frageCounter = 0;
 
 	private String[][] laptopDataBase = new String[3][2];
-	protected boolean noMoreQuestions = false;
+	private boolean noMoreQuestions = false;
 	String kompletteAnfrage = "";
 	String konfiguration = "1";
 	String convertible = "false";
@@ -31,10 +31,10 @@ public class Schueler implements Nutzer {
 		return question;
 	}
 
-	public void takeAnswer(String answer) {
+	public void takeAnswer(int answerAsInt) {
 		switch (frageCounter) {
 		case 0:
-			if (answer.equalsIgnoreCase("ja")) {
+			if (answerAsInt == 1) {
 				frageCounter++;
 			} else {
 				frageCounter = +2;
@@ -42,7 +42,7 @@ public class Schueler implements Nutzer {
 			}
 			break;
 		case 1:
-			if (answer.equalsIgnoreCase("ja")) {
+			if (answerAsInt == 1) {
 				konfiguration = "3";
 				convertible = "false";
 				noMoreQuestions = true;
@@ -52,7 +52,7 @@ public class Schueler implements Nutzer {
 			}
 			break;
 		case 2:
-			if (answer.equalsIgnoreCase("ja")) {
+			if (answerAsInt == 1) {
 				convertible = "true";
 			} else {
 				convertible = "false";
@@ -73,7 +73,7 @@ public class Schueler implements Nutzer {
 	public String getLaptopFromAnswers() {
 
 		String antwort = "";
-		for (int i = 1; i < laptopDataBase.length; i++) {
+		for (int i = 0; i < laptopDataBase.length; i++) {
 			if (laptopDataBase[i][0].equals(kompletteAnfrage)) {
 				antwort = laptopDataBase[i][1];
 				break;
@@ -83,19 +83,10 @@ public class Schueler implements Nutzer {
 		String aussage1 = "Der " + antwort + " ist für dich eine gute Auswahl.";
 		return aussage1;
 	}
-
-	@Override
-	public int getCounter() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void setFrageCounter(int frageCounter) {
-		// TODO Auto-generated method stub
-		this.frageCounter = frageCounter;
-
+	public boolean getNoMoreQuestions() {
+		return noMoreQuestions;
 	}
 
 }
+
 
