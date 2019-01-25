@@ -13,7 +13,7 @@ public class Student implements Nutzer{
 	}
 
 
-    //Konfigurationsvariablen
+    ////Spezifikationen
     private String konfiguration = "";
     private String akkuLaufzeit = "";
     private String gewicht = "" ;
@@ -171,9 +171,8 @@ public class Student implements Nutzer{
 	public String getLaptopFromAnswers() {
 		//array durchgehen und mit anfrage vergleichen
 		for (int i = 0 ; i <= laptopDataBase.length ; i++ ) 
-			if (completteAnfrage.equals(laptopDataBase[i][0])){
+			if (completteAnfrage.equals(laptopDataBase[i][0]))
 				return laptopDataBase[i][1];		
-			}
 		return "error";
 	}
 

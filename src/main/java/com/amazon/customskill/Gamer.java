@@ -3,10 +3,10 @@ package com.amazon.customskill;
 public class Gamer implements Nutzer{
 	
 	
-	//initialisiert mit standartwerten
-	String leuchten="true";
-	String aktuell="false";
-	String bildschirm = "false";
+	//Spezifikationen
+	private String leuchten="true";
+	private String aktuell="false";
+	private String bildschirm = "false";
 	
 	protected String[][] laptopDataBase = new String [8][2];
 	

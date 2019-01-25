@@ -9,15 +9,14 @@ public class PrivatNutzer implements Nutzer {
 	protected String completteAnfrage = ""; 
 	private int frageCounter = 0;
 	
+	//Spezifikationen
 	private String convertible = "true";
 	private String laufwerk = "true";
 	private String blueRayLaufwerk = "false";
 	
 	private boolean noMoreQuestions = false;
 	
-	public boolean getNoMoreQuestions() {
-		return noMoreQuestions;
-	}
+	public boolean getNoMoreQuestions() {return noMoreQuestions;}
 		
 	public PrivatNutzer() {
 		listAusfuellen();
@@ -102,9 +101,8 @@ public class PrivatNutzer implements Nutzer {
 	public String getLaptopFromAnswers() {
 		//array durchgehen und mit anfrage vergleichen
 		for (int i = 0 ; i <= laptopDataBase.length ; i++ ) 
-			if (completteAnfrage.equals(laptopDataBase[i][0])){
+			if (completteAnfrage.equals(laptopDataBase[i][0]))
 				return laptopDataBase[i][1];		
-			}
 		return "error";
 	}
 }

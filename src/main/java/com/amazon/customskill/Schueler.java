@@ -1,13 +1,17 @@
 package com.amazon.customskill;
 
 public class Schueler implements Nutzer {
+	
 	private int frageCounter = 0;
-
 	private String[][] laptopDataBase = new String[3][2];
+	
 	private boolean noMoreQuestions = false;
-	String kompletteAnfrage = "";
-	String konfiguration = "1";
-	String convertible = "false";
+	public boolean getNoMoreQuestions() {return noMoreQuestions;}
+	
+	//Spezifikationen
+	private String konfiguration = "1";
+	private String convertible = "false";
+	private String completteAnfrage = "";
 
 	public Schueler() {
 		listAusfuellen();
@@ -52,16 +56,13 @@ public class Schueler implements Nutzer {
 			}
 			break;
 		case 2:
-			if (answerAsInt == 1) {
+			if (answerAsInt == 1) 
 				convertible = "true";
-			} else {
+			else 
 				convertible = "false";
-			}
 			break;
-
 		}
-		kompletteAnfrage = konfiguration + "," + convertible;
-
+		completteAnfrage = konfiguration + "," + convertible;
 	}
 
 	public void listAusfuellen() {
@@ -71,21 +72,14 @@ public class Schueler implements Nutzer {
 	}
 
 	public String getLaptopFromAnswers() {
-
-		String antwort = "";
-		for (int i = 0; i < laptopDataBase.length; i++) {
-			if (laptopDataBase[i][0].equals(kompletteAnfrage)) {
-				antwort = laptopDataBase[i][1];
-				break;
-			}
-		}
-
-		String aussage1 = "Der " + antwort + " ist fuer dich eine gute Auswahl.";
-		return aussage1;
+		//array durchgehen und mit anfrage vergleichen
+		for (int i = 0 ; i <= laptopDataBase.length ; i++) 
+			if (completteAnfrage.equals(laptopDataBase[i][0]))
+				return laptopDataBase[i][1];		
+		return "error";
 	}
-	public boolean getNoMoreQuestions() {
-		return noMoreQuestions;
-	}
+	
+
 
 }
 

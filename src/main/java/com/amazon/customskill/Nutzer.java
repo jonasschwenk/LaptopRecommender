@@ -15,7 +15,7 @@ public interface Nutzer {
 
 	public String getLaptopFromAnswers(); // Wertet das Array "answers" aus, ausgabe ist intern von diesem abhängig
 
-	public void listAusfuellen();
+	public void listAusfuellen(); //erstellt datenbank	
 
-	public void takeAnswer(int answerAsInt);
+	public void takeAnswer(int answerAsInt); //nimmt analysierte antworten entgegen und setzt entsprehchend die konfiguration
 }

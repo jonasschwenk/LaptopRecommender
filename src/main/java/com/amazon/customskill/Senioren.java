@@ -6,10 +6,10 @@ public class Senioren implements Nutzer {
 	String completteAnfrage = "";
 	int frageCounter = 0;
 	
-	protected boolean noMoreQuestions = false;
-	
+	private boolean noMoreQuestions = false;	
 	public boolean getNoMoreQuestions() {return noMoreQuestions;}
 
+	//Spezifikationen
 	String Gewicht = "";
 	String Bildschirm = "";
 
@@ -22,7 +22,7 @@ public class Senioren implements Nutzer {
 		switch(frageCounter){
 			case 0:
 				question ="Moechtest du den laptop auch unterwegs oder im urlaub benutzen?";
-				frageCounter = frageCounter + 1;
+				frageCounter++;
 				break;
 			case 1:
 				question = "Hast du Probleme mit den Augen und ein groesserer Bildschirm wuerde dir helfen?";
@@ -67,9 +67,8 @@ public class Senioren implements Nutzer {
 	public String getLaptopFromAnswers() {
 		//array durchgehen und mit anfrage vergleichen
 		for (int i = 0 ; i <= laptopDataBase.length ; i++ ) 
-			if (completteAnfrage.equals(laptopDataBase[i][0])){
+			if (completteAnfrage.equals(laptopDataBase[i][0]))
 				return laptopDataBase[i][1];		
-			}
 		return "error";
 	}
 }
