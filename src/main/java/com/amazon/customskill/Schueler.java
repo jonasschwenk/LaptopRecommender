@@ -22,7 +22,6 @@ public class Schueler implements Nutzer {
 		switch (frageCounter) {
 		case 0:
 			question = "Bist du aelter als zwoelf?";
-//                frageCounter ++;
 			break;
 		case 1:
 			question = "Wird der Laptop zum Spielen verwendet?";
@@ -41,7 +40,7 @@ public class Schueler implements Nutzer {
 			if (answerAsInt == 1) {
 				frageCounter++;
 			} else {
-				frageCounter = +2;
+				frageCounter += 2;
 				konfiguration = "1";
 			}
 			break;
@@ -60,6 +59,7 @@ public class Schueler implements Nutzer {
 				convertible = "true";
 			else 
 				convertible = "false";
+			noMoreQuestions = true;
 			break;
 		}
 		completteAnfrage = konfiguration + "," + convertible;
