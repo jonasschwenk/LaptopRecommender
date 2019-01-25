@@ -133,31 +133,31 @@ public class AlexaSkillSpeechlet implements SpeechletV2 {
 		switch (group) {
 		case "student":
 			nutzer = new Student();
-			firstQuestion = "Wie viel möchtest du maximal ausgeben?";
+			firstQuestion = "Wie viel moechtest du maximal ausgeben?";
 			counter++;
 			break;
 		case "schüler":
 			nutzer = new Schueler();
-			firstQuestion = "Wie viel möchtest du maximal ausgeben?";
+			firstQuestion = "Wie viel moechtest du maximal ausgeben?";
 			counter++;
 			break;
 		case "senior":
 			nutzer = new Senioren();
-			firstQuestion = "Wie viel möchtest du maximal ausgeben?";
+			firstQuestion = "Wie viel moechtest du maximal ausgeben?";
 			counter++;
 			break;
 		case "gamer":
 			nutzer = new Gamer();
-			firstQuestion = "Wie viel möchtest du maximal ausgeben?";
+			firstQuestion = "Wie viel moechtest du maximal ausgeben?";
 			counter++;
 			break;
 		case "privatnutzer":
 			nutzer = new PrivatNutzer();
-			firstQuestion = "Wie viel möchtest du maximal ausgeben?";
+			firstQuestion = "Wie viel moechtest du maximal ausgeben?";
 			counter++;
 			break;
 		default:
-			firstQuestion = "Bitte eine der folgenden Kategorien wählen: Privatnutzer, Student, Schüler, Gamer oder Senior!";
+			firstQuestion = "Bitte eine der folgenden Kategorien waehlen: Privatnutzer, Student, Schueler, Gamer oder Senior!";
 			break;
 		}
 		lastQuestion = firstQuestion;
@@ -198,7 +198,7 @@ public class AlexaSkillSpeechlet implements SpeechletV2 {
 	 */
 	private SpeechletResponse getWelcomeResponse() {
 		return askUserResponse(
-				"Willkommen bei der Notebookberatung durch Alexa! Ich werde dir eine Reihe an Fragen stellen und an Hand deiner Antworten werde ich dir eine Liste von zu dir passenden Laptops ausgeben! Zu welcher der folgenden Nutzergruppen wird der Nutzer des Gerätes gehören? Ist er ein Student, ein Schüler, ein Senior, ein Privatnutzer oder ein Gamer?");
+				"Willkommen bei der Notebookberatung durch Alexa! Ich werde dir eine Reihe an Fragen stellen und an Hand deiner Antworten werde ich dir eine Liste von zu dir passenden Laptops ausgeben! Zu welcher der folgenden Nutzergruppen wird der Nutzer des Geraetes gehoeren? Ist er ein Student, ein Schueler, ein Senior, ein Privatnutzer oder ein Gamer?");
 		// return askUserResponse("<amazon:effect name=\"whispered\">Hey
 		// Leute</amazon:effect>, ich bin ein <phoneme alphabet=\"ipa\"
 		// ph=\"ËˆfÊŒni\">funny</phoneme> Nomen <phoneme alphabet=\"ipa\"

@@ -40,7 +40,7 @@ public class PrivatNutzer implements Nutzer {
         String question = "";;
         switch(frageCounter){
             case 1:
-                question ="Moechtest du ein Covertible haben, sprich soll man die Tastatur abnehmen können?";
+                question ="Moechtest du ein Covertible haben, sprich soll man die Tastatur abnehmen koennen?";
                 frageCounter ++;
                 break;
             case 2:
@@ -48,7 +48,7 @@ public class PrivatNutzer implements Nutzer {
                 frageCounter ++;
                 break;
             case 3: 
-            	question = "Moechtest du ein Blue Ray abspielen können?";
+            	question = "Moechtest du ein Blue Ray abspielen koennen?";
             	break;
         
             default: break;

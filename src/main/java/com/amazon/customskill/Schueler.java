@@ -17,14 +17,14 @@ public class Schueler implements Nutzer {
 		String question = "";
 		switch (frageCounter) {
 		case 0:
-			question = "Bist du älter als zwölf?";
+			question = "Bist du aelter als zwoelf?";
 //                frageCounter ++;
 			break;
 		case 1:
 			question = "Wird der Laptop zum Spielen verwendet?";
 			break;
 		case 2:
-			question = "Moechtest du ein Covertible haben, sprich soll man die Tastatur abnehmen können?";
+			question = "Moechtest du ein Covertible haben, sprich soll man die Tastatur abnehmen koennen?";
 			noMoreQuestions = true;
 			break;
 		}
@@ -80,7 +80,7 @@ public class Schueler implements Nutzer {
 			}
 		}
 
-		String aussage1 = "Der " + antwort + " ist für dich eine gute Auswahl.";
+		String aussage1 = "Der " + antwort + " ist fuer dich eine gute Auswahl.";
 		return aussage1;
 	}
 	public boolean getNoMoreQuestions() {
