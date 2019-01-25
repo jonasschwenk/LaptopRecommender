@@ -28,25 +28,25 @@ public class Student {
     	
     	switch (frageCounter) {
     		
-    	case 0 : frage = "Studiert diese Person Informatik ?" ;
+    	case 0 : frage = "Studierst du Informatik ?" ;
     			 break;
     			 
-    	case 1 : frage = "Hat die Person was mit Bildbearbeitung zu tun?" ;
+    	case 1 : frage = "Bearbeitest du gerne Bilder auf deinem Laptop?" ;
 		 		 ++frageCounter ;
 		 		 break;
 		 		 
-    	case 2 : frage = "Wird sie lange ohne Kabelanschluss mit dem Laptop arbeiten ?" ;
+    	case 2 : frage = "Arbeitest du viel am Laptop ohne eine Steckdose in der Nähe ?" ;
 		 		 ++frageCounter ;
 		 		 break;
 		 		 
-    	case 3 : frage = "Möchte sie ein leichter Laptop ?" ;
+    	case 3 : frage = "Möchtest du einen leichten Laptop ?" ;
 		 		 ++frageCounter ;
 		 		 break;
 		 		 
-    	case 4 : frage = "Hätte sie ein Convertible  ?" ;
+    	case 4 : frage = "\"Moechtest du ein Covertible haben, sprich soll man die Tastatur abnehmen können?" ;
 		 		 break;
 		 		 
-    	case 5 : frage = "Möchte sie ein Touchscreen- Display ?" ;
+    	case 5 : frage = "Möchtest du ein Touchscreen- Display ?" ;
 		 		 ++frageCounter ;
 		 		 break;
 		 		 

@@ -17,14 +17,14 @@ public class Schueler implements Nutzer {
 		String question = "";
 		switch (frageCounter) {
 		case 0:
-			question = "Ist der schüler oder die schülerin älter als zwölf?";
+			question = "Bist du älter als zwölf?";
 //                frageCounter ++;
 			break;
 		case 1:
 			question = "Wird der Laptop zum Spielen verwendet?";
 			break;
 		case 2:
-			question = "Soll es sich bei  dem Laptop um ein Convertible handeln?";
+			question = "Moechtest du ein Covertible haben, sprich soll man die Tastatur abnehmen können?";
 			noMoreQuestions = true;
 			break;
 		}

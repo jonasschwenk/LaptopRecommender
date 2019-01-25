@@ -13,11 +13,11 @@ public Senioren(){
         String question;
         switch(frageCounter){
             case 0:
-                question ="Möchtet er oder sie der laptop auch unterwegs oder im urlaub benutzen?";
+                question ="Möchtest du den laptop auch unterwegs oder im urlaub benutzen?";
                 frageCounter = frageCounter + 1;
                 break;
             case 1:
-                question = "Hat der senior oder die seniorin Sehprobleme?";
+                question = "Hast du Probleme mit den Augen und ein größerer Bildschirm würde dir helfen?";
                 noMoreQuestions = true;
                 break;
             default:
