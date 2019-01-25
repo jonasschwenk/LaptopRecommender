@@ -1,30 +1,29 @@
 package com.amazon.customskill;
 
-public class Student {
+public class Student implements Nutzer{
   
-  private String[][] laptopDataBase = new String[37][2]  ;    // Tabelle von 37 Zeilen und 7 Spalte. Das ist unsere DataBase fÃ¼r den Laptop
+	private String[][] laptopDataBase = new String[37][2]  ;    // Tabelle von 37 Zeilen und 7 Spalte. Das ist unsere DataBase fÃ¼r den Laptop
     private int frageCounter  = 0 ;
-    private String completteAnfrage = "";   
-    private Boolean ausgabe = false ; // Variable, die sagt wenn man die Methode fÃ¼r die Ausgabe 
-	
-	 public boolean getNoMoreQuestions() {
-		    	
-		return noMoreQuestion;
-	 }
+    private boolean noMoreQuestions = false ; // Variable, die sagt wenn man die Methode fÃ¼r die Ausgabe 
+    public boolean getNoMoreQuestions() {return noMoreQuestions;}
     
-    public String selectQuestion (String antwort) {
+    
+	public Student() {
+		listAusfuellen();
+	}
+
+
+    //Konfigurationsvariablen
+    private String konfiguration = "";
+    private String akkuLaufzeit = "";
+    private String gewicht = "" ;
+    private String convertible = "";
+    private String touchScreen = "false";
+    private String completteAnfrage = "";   
+    
+    public String selectQuestion () {
     	
     	String frage = "";
-    	
-    	/*if ((frageCounter-1)==1 && antwort.equals("ya")) {
-    		
-    		frageCounter =-1 ;
-    	}
-    	
-    	if ((frageCounter-1)==4 && antwort.equals("ya")) {
-    		
-    		frageCounter =-1 ;
-    	}*/
     	
     	switch (frageCounter) {
     		
@@ -32,22 +31,18 @@ public class Student {
     			 break;
     			 
     	case 1 : frage = "Bearbeitest du gerne Bilder auf deinem Laptop?" ;
-		 		 ++frageCounter ;
 		 		 break;
 		 		 
     	case 2 : frage = "Arbeitest du viel am Laptop ohne eine Steckdose in der Nähe ?" ;
-		 		 ++frageCounter ;
 		 		 break;
 		 		 
-    	case 3 : frage = "Möchtest du einen leichten Laptop ?" ;
-		 		 ++frageCounter ;
+    	case 3 : frage = "Moechtest du einen leichten Laptop ?" ;
 		 		 break;
 		 		 
-    	case 4 : frage = "\"Moechtest du ein Covertible haben, sprich soll man die Tastatur abnehmen können?" ;
+    	case 4 : frage = "Moechtest du ein Covertible haben, sprich soll man die Tastatur abnehmen koennen?" ;
 		 		 break;
 		 		 
-    	case 5 : frage = "Möchtest du ein Touchscreen- Display ?" ;
-		 		 ++frageCounter ;
+    	case 5 : frage = "Moechtest du ein Touchscreen- Display ?" ;
 		 		 break;
 		 		 
     	default :  // Vorsicht 
@@ -60,16 +55,11 @@ public class Student {
     
     
     
-    public void takeAnswer (String antwort) {  // Diese Methode nimmt die Antworten des nutzer und bildet eine Suchanfrage damit.
-    	String konfiguration = "";
-        String akkuLaufzeit = "";
-        String gewicht = "" ;
-        String convertible = "";
-        String touchScreen = "false";
-    	
-    	switch (frageCounter ) {
-    	
-    	case 0 : if (antwort.equalsIgnoreCase("ja")) {
+    public void takeAnswer (int answerAsInt) {  // Diese Methode nimmt die Antworten des nutzer und bildet eine Suchanfrage damit.
+
+       	switch (frageCounter) {
+       		case 0 :
+    			if (answerAsInt == 1) {
     				konfiguration = "2";
     				++ frageCounter;
     			}else {
@@ -77,55 +67,57 @@ public class Student {
     				frageCounter=+2 ;
     			}
     			break;
-    			
-    	case 1 :  if (antwort.equalsIgnoreCase("ja")) {
-					konfiguration = "4";
-    			  }
+       		case 1 :
+    			if (answerAsInt == 1)
+					konfiguration = "4"; 
+    			frageCounter++;
     			  break;
     			  
-    	case 2 : if (antwort.equalsIgnoreCase("ja")) {
+       		case 2 :
+    			if (answerAsInt == 1) 
     				akkuLaufzeit = ">= 7 Stunden";
-				 }else {
+				else 
 					akkuLaufzeit = "< 7 Stunden" ;
-				 }
+    			frageCounter++;
     			 break;
     			 
-    	case 3 : if (antwort.equalsIgnoreCase("ja")) {
+       		case 3 :
+    			if (answerAsInt == 1) 
     				gewicht = "<= 2 Kg";
-		 		 }else {
+		 		else 
 		 			gewicht = "> 2 Kg" ;
-		 		 }
-    			 break;
+    			frageCounter++;
+    			break;
     			 
-    	case 4 :   if (antwort.equalsIgnoreCase("ja")) {
+       		case 4 :   
+    			if (answerAsInt == 1) {
     					convertible = "true";
-    					ausgabe = true;
+    					noMoreQuestions = true;
     					
-		 		   }else {
-		 			   	convertible = "false" ;
-		 			    ++ frageCounter;
-		 		   }
-    			   break;
+		 		}else {
+		 			convertible = "false" ;
+		 			frageCounter++;
+		 		}
+    			break;
     			   
-    	case 5 : if (antwort.equalsIgnoreCase("ja")) {
+       		case 5 : 
+    			if (answerAsInt == 1) {
     				 touchScreen = "true";
-    				 ausgabe = true;
-		 		 }else {
-		 			 touchScreen = "false" ;
-		 			ausgabe = true;
-		 		 }
+    				 noMoreQuestions = true;
+    			}else {
+		 			touchScreen = "false" ;
+		 			noMoreQuestions = true;
+    			}
     			 break;
     			 
-    	default : break;
-    	
-    	}
-    	
+       		default : break;
+    	}	
     	completteAnfrage = konfiguration+","+akkuLaufzeit+","+gewicht+","+convertible+","+touchScreen ;
     }
     
 
     
-    public void ListAusfuellen() { // Diese Methode fÃ¼llt unsere Database  einfach . 
+    public void listAusfuellen() { // Diese Methode fÃ¼llt unsere Database  einfach . 
     	
     	/*laptopDataBase[i][0] = "Konfiguration,Akkulaufzeit,Gewicht,Konvertible,Touchscreem" ;       //laptopDataBase[i][1] = "Notebook" ;
     	 * Konfiguration 1 : 4 GB Ram, i3, 256 SSD, ab 370 Euro
@@ -176,18 +168,13 @@ public class Student {
     }
     
      
-     public String ausgabeAlexa() {
-     	
-     	String antwort = "";
-     	for (int i=1; i < laptopDataBase.length; i++) {
-     		if (laptopDataBase[i][0].equals(completteAnfrage)) {
-     			antwort = laptopDataBase[i][1];
-     			break;
-     		}
-     	}
-     	
-     	String aussage1= "Der "+antwort+ " ist für sie ein guter Auswahl. Außerdem empfele ich Ihnen auch eine Notebook Tasche zu kaufen" ;
-     	return aussage1;
-     }
+	public String getLaptopFromAnswers() {
+		//array durchgehen und mit anfrage vergleichen
+		for (int i = 0 ; i <= laptopDataBase.length ; i++ ) 
+			if (completteAnfrage.equals(laptopDataBase[i][0])){
+				return laptopDataBase[i][1];		
+			}
+		return "error";
+	}
 
 }

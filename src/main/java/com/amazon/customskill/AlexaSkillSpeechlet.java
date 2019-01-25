@@ -10,7 +10,7 @@
 package com.amazon.customskill;
 
 import java.util.*;
-import java.util.stream.IntStream;
+//import java.util.stream.IntStream;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -24,7 +24,7 @@ import com.amazon.speech.speechlet.SessionEndedRequest;
 import com.amazon.speech.speechlet.SessionStartedRequest;
 import com.amazon.speech.speechlet.SpeechletResponse;
 import com.amazon.speech.speechlet.SpeechletV2;
-import com.amazon.speech.ui.PlainTextOutputSpeech;
+//import com.amazon.speech.ui.PlainTextOutputSpeech;
 import com.amazon.speech.ui.Reprompt;
 import com.amazon.speech.ui.SsmlOutputSpeech;
 
@@ -49,7 +49,7 @@ public class AlexaSkillSpeechlet implements SpeechletV2 {
 
 	private PosTagger p;
 
-	private static int[] answers = new int[6];
+//	private static int[] answers = new int[6];
 
 	@Override
 	public void onSessionStarted(SpeechletRequestEnvelope<SessionStartedRequest> requestEnvelope) {
