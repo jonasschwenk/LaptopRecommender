@@ -78,9 +78,6 @@ public class Schueler implements Nutzer {
 				return laptopDataBase[i][1];		
 		return "error";
 	}
-	
-
-
 }
 
 
