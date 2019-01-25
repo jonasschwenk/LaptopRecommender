@@ -2,8 +2,8 @@ package com.amazon.customskill;
 
 public class Senioren implements Nutzer {
 	private String[][] laptopDataBase = new String[4][2];
-	private String allAnswers = "";
-	Boolean noMoreQuestions = false;
+	String allAnswers = "";
+	private Boolean noMoreQuestions = false;
 	int frageCounter = 0;
 	
 public Senioren(){
@@ -74,6 +74,10 @@ return allAnswers;
    	String aussage1= "Die "+antwort+ " ist für dich ein guter Auswahl. Außerdem empfehle ich dir auch eine Mause zu kaufen." ;
    	return aussage1;
    }
+	
+public boolean getNoMoreQuestions() {
+	return noMoreQuestions;
+ }	
   
 
 }
