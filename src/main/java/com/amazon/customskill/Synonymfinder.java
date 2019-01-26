@@ -14,7 +14,7 @@ public class Synonymfinder{
 	private String PrivatnutzerSynonyms[] = {"privatnutzer"};
 	
 	
-	
+	//übers alle arrays der reihe nach drüberiterieren bis passendes gefunden wurde, dann erstes element ausgeben (das was wir haben wollen)
 	public String erkenneSynonym(String input) {	
 		for (int i = 0 ; i < JaSynonyms.length ; i++) 
 			if (input.equalsIgnoreCase(JaSynonyms[i]))
@@ -36,7 +36,7 @@ public class Synonymfinder{
 				return PrivatnutzerSynonyms[0];	
 		//und so weiter für alles was wir erkennen wollen
 		
-		return "nichts gefunden";
+		return "nichts gefunden"; //catchAll
 	}
 	
 	
