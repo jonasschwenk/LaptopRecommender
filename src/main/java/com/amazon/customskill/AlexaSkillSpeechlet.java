@@ -41,6 +41,7 @@ public class AlexaSkillSpeechlet implements SpeechletV2 {
 	public static String userRequest;
 	String lastQuestion = "";
 	int minimumPrice = 370;
+	boolean lowBudget = false;
 	Nutzer nutzer;
 	
 	int groupCounter = 0;
@@ -72,13 +73,15 @@ public class AlexaSkillSpeechlet implements SpeechletV2 {
 		if (userRequest.equalsIgnoreCase("abbrechen")) {
 			return endResponse("Beratung abgebrochen!");
 		}
-
-		if (lastQuestion.equalsIgnoreCase("Wie viel m√∂chtest du maximal ausgeben?")) {
+		
+		if (lastQuestion.equalsIgnoreCase("Wie viel moechtest du maximal ausgeben?")) {
 			budget = stringToNumber(userRequest);
 			lastQuestion = "";
-			if (budget < minimumPrice)
+			if (budget < minimumPrice) {
+				lowBudget = true;
 				return askUserResponse(
-						"Dein Budget liegt unterhalb des Preises meiner Minimalkonfiguration! Daher werde ich dir keinen Laptop innerhalb deines Budegets empfehlen k√∂nnen. M√∂chtest du die Beratung dennoch Fortsetzen?");
+						"Dein Budget liegt unterhalb des Preises meiner Minimalkonfiguration! Daher werde ich dir keinen Laptop innerhalb deines Budgets empfehlen koennen. Moechtest du die Beratung dennoch Fortsetzen?");
+			}
 			return askUserResponse(nutzer.selectQuestion());
 		}
 
@@ -89,6 +92,17 @@ public class AlexaSkillSpeechlet implements SpeechletV2 {
 		}
 		if (counter != 0 && lastQuestion.equals("")) {
 			int answerAsInt = analyseAnswer(userRequest);//Analysiere die Antwort und gibt bei nein 0 ja 1 und sonst 2 zur√ºck
+			if(lowBudget && answerAsInt  == 1) {
+				lowBudget = false;
+				return askUserResponse(nutzer.selectQuestion());
+			}else if(lowBudget && answerAsInt == 0)
+				return endResponse("Okay. Ich empfehle dir, noch etwas Geld zu sparen, oder dich auf dem Gebrauchtmarkt umzusehen! Die Beratung wird jetzt beendet!");
+				
+			if(userRequest.equalsIgnoreCase("beratung ¸berspringen")) {
+				return endResponse(nutzer.getLaptopFromAnswers());
+			}
+			
+			
 			nutzer.takeAnswer(answerAsInt);
 			if (!nutzer.getNoMoreQuestions()) {
 				String question = nutzer.selectQuestion();
@@ -100,7 +114,7 @@ public class AlexaSkillSpeechlet implements SpeechletV2 {
 		}
 
 			logger.info("Received following text: [" + userRequest + "]");
-			return askUserResponse("Diese Aufgabe h√§tte nicht kommen d√ºrfen!");
+			return askUserResponse("Diese Ausgabe haette nicht ausgegeben werden duerfen!");
 	}
 
 	public int analyseAnswer(String answer) { // Antwort analysieren
@@ -136,7 +150,7 @@ public class AlexaSkillSpeechlet implements SpeechletV2 {
 			firstQuestion = "Wie viel moechtest du maximal ausgeben?";
 			counter++;
 			break;
-		case "sch√ºler":
+		case "sch¸ler":
 			nutzer = new Schueler();
 			firstQuestion = "Wie viel moechtest du maximal ausgeben?";
 			counter++;
@@ -244,10 +258,10 @@ public class AlexaSkillSpeechlet implements SpeechletV2 {
 		boolean isValidInput = true;
 		long result = 0;
 		int finalResult = 0;
-		List<String> allowedStrings = Arrays.asList("null", "eins", "zwei", "drei", "vier", "f√ºnf", "sechs", "sieben",
-				"acht", "neun", "zehn", "elf", "zw√∂lf", "dreizehn", "vierzehn", "f√ºnfzehn", "sechzehn", "siebzehn",
-				"achtzehn", "neunzehn", "zwanzig", "einzwanzig", "drei√üig", "eindrei√üig", "vierzig", "einvierzig",
-				"f√ºnfzig", "einf√ºnfzig", "sechzig", "einsechzig", "siebzig", "einsiebzig", "achtzig", "einachtzig",
+		List<String> allowedStrings = Arrays.asList("null", "eins", "zwei", "drei", "vier", "f¸nf", "sechs", "sieben",
+				"acht", "neun", "zehn", "elf", "zwˆlf", "dreizehn", "vierzehn", "f¸nfzehn", "sechzehn", "siebzehn",
+				"achtzehn", "neunzehn", "zwanzig", "einzwanzig", "dreiﬂig", "eindreiﬂig", "vierzig", "einvierzig",
+				"f¸nfzig", "einf¸nfzig", "sechzig", "einsechzig", "siebzig", "einsiebzig", "achtzig", "einachtzig",
 				"neunzig", "einneunzig", "einhundert", "eintausend", "ein", "euro", "hundert", "tausend");
 
 		if (input != null && input.length() > 0) {
@@ -277,7 +291,7 @@ public class AlexaSkillSpeechlet implements SpeechletV2 {
 						result += 3;
 					} else if (str.equalsIgnoreCase("vier")) {
 						result += 4;
-					} else if (str.equalsIgnoreCase("f√ºnf")) {
+					} else if (str.equalsIgnoreCase("f¸nf")) {
 						result += 5;
 					} else if (str.equalsIgnoreCase("sechs")) {
 						result += 6;
@@ -291,13 +305,13 @@ public class AlexaSkillSpeechlet implements SpeechletV2 {
 						result += 10;
 					} else if (str.equalsIgnoreCase("elf")) {
 						result += 11;
-					} else if (str.equalsIgnoreCase("zw√∂lf")) {
+					} else if (str.equalsIgnoreCase("zwˆlf")) {
 						result += 12;
 					} else if (str.equalsIgnoreCase("dreizehn")) {
 						result += 13;
 					} else if (str.equalsIgnoreCase("vierzehn")) {
 						result += 14;
-					} else if (str.equalsIgnoreCase("f√ºnfzehn")) {
+					} else if (str.equalsIgnoreCase("f¸nfzehn")) {
 						result += 15;
 					} else if (str.equalsIgnoreCase("sechzehn")) {
 						result += 16;
@@ -311,17 +325,17 @@ public class AlexaSkillSpeechlet implements SpeechletV2 {
 						result += 20;
 					} else if (str.equalsIgnoreCase("einzwanzig")) {
 						result += 21;
-					} else if (str.equalsIgnoreCase("drei√üig")) {
+					} else if (str.equalsIgnoreCase("dreiﬂig")) {
 						result += 30;
-					} else if (str.equalsIgnoreCase("eindrei√üg")) {
+					} else if (str.equalsIgnoreCase("eindreiﬂg")) {
 						result += 31;
 					} else if (str.equalsIgnoreCase("vierzig")) {
 						result += 40;
 					} else if (str.equalsIgnoreCase("einvierzig")) {
 						result += 41;
-					} else if (str.equalsIgnoreCase("f√ºnfzig")) {
+					} else if (str.equalsIgnoreCase("f¸nfzig")) {
 						result += 50;
-					} else if (str.equalsIgnoreCase("einf√ºnfzig")) {
+					} else if (str.equalsIgnoreCase("einf¸nfzig")) {
 						result += 51;
 					} else if (str.equalsIgnoreCase("sechzig")) {
 						result += 60;
