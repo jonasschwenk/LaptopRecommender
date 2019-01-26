@@ -27,28 +27,19 @@ public class Gamer implements Nutzer{
 	}
 	
 	public void takeAnswer(int answerAsInt) {
-
 		switch(frageCounter) {
 			case 0:
-				if (answerAsInt == 1)
-					leuchten = "true";
-				else 
-					leuchten = "false";
+				leuchten = (answerAsInt == 1) ? "true" : "false";
 				break;
 			case 1:
-				if (answerAsInt == 1)
-					aktuell = "true";
-				else 
-					aktuell = "false";
+				aktuell = (answerAsInt == 1) ? "true" : "false";
 				break;
 			case 2:
-				if (answerAsInt == 1)
-					bildschirm = "klein";
-				else 
-					bildschirm = "gross";
+				bildschirm = (answerAsInt == 1) ? "klein" : "gross";
 				noMoreQuestions = true;
 				break;
-			default : break;
+			default: 
+				break;
 		}
 		completteAnfrage = leuchten + "," + aktuell + "," + bildschirm;
 	}
@@ -71,7 +62,7 @@ public class Gamer implements Nutzer{
 		laptopDataBase[6][0] = "true,false,gross";	laptopDataBase[6][1]="...";
 		laptopDataBase[7][0] = "true,true,gross";	laptopDataBase[7][1]="...";
 	}
-	//
+
 	public String selectQuestion() {
 	        String question;
 	        switch(frageCounter){
@@ -90,9 +81,6 @@ public class Gamer implements Nutzer{
 	            	break;
 	            default:
 	                question = "Der frageCounter ist kleiner 0 oder groesser 2!";
-	                //frageCounter = 0;
-	                //The program doesn't stop at the moment rather it starts at question 1
-
 	        }
 	        return question;
 	}
