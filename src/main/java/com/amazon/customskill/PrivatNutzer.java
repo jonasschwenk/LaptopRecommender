@@ -88,14 +88,14 @@ public class PrivatNutzer implements Nutzer {
 	}
 	
 	public void listAusfuellen() {
-		laptopDataBase[0][0] = "true,true,false";	laptopDataBase[0][1]="...";
+		laptopDataBase[0][0] = "true,true,false";	laptopDataBase[0][1]="Leider gibt es keine Convertibles mit eingebautem Laufwerk. Ich kann dir als Alternative das Acer Spin 3 empfehlen. Dazu kaufst du dir dann noch ein USB Laufwerk, falls das notwendig ist.";
 		laptopDataBase[1][0] = "true,false,true"; 	laptopDataBase[1][1]="...";
 		laptopDataBase[2][0] = "false,true,true";	laptopDataBase[2][1]="...";
 		laptopDataBase[3][0] = "false,false,true";	laptopDataBase[3][1]="...";
-		laptopDataBase[4][0] = "false,true,false";	laptopDataBase[4][1]="...";
-		laptopDataBase[5][0] = "true,false,false"; 	laptopDataBase[5][1]="...";
+		laptopDataBase[4][0] = "false,true,false";	laptopDataBase[4][1]="HP 250 G6";
+		laptopDataBase[5][0] = "true,false,false"; 	laptopDataBase[5][1]="Acer Spin 3";
 		laptopDataBase[6][0] = "true,true,true";	laptopDataBase[6][1]="...";
-		laptopDataBase[7][0] = "false,false,false";	laptopDataBase[7][1]="...";   // Die Tabelle ist komplett ausgefüllt
+		laptopDataBase[7][0] = "false,false,false";	laptopDataBase[7][1]="HP 250 G6";   // Die Tabelle ist komplett ausgefüllt
 	}
 	
 	public String getLaptopFromAnswers() {
