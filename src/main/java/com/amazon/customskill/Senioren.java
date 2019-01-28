@@ -57,10 +57,11 @@ public class Senioren implements Nutzer {
   	
 			//laptopDataBase[i][0] = "Gewicht, Bildschirm grosse" ;    //laptopDataBase[i][1] = "Notebook" ;
   	
-		laptopDataBase[0][0] = "<= 2kg,grosses bildschirm"  ;    	laptopDataBase[1][1] =  "..." ;
-		laptopDataBase[1][0] = "<= 2kg,normales bildschirm" ;    	laptopDataBase[2][1] =  "..." ;
-		laptopDataBase[2][0] = "> 2kg,grosses bildschirm" ;	    	laptopDataBase[3][1] =  "..." ;
-		laptopDataBase[3][0] = "> 2kg,normales bildschirm" ;	 	laptopDataBase[4][1] =  "..." ;   // die Tabelle ist komplett ausgefuellt
+		laptopDataBase[0][0] = "<= 2kg,grosses bildschirm"  ;    	laptopDataBase[0][1] =  "Lenovo  Win 10" ;
+		laptopDataBase[1][0] = "<= 2kg,normales bildschirm" ;    	laptopDataBase[1][1] =  "HP 15 IPS M Win10" ;
+		laptopDataBase[2][0] = "> 2kg,grosses bildschirm" ;	    	laptopDataBase[2][1] =  "HP 17-by0101ng Intel Core Win10" ;
+		laptopDataBase[3][0] = "> 2kg,normales bildschirm" ;	 	laptopDataBase[3][1] =  "Lenovo Ideapad Win1" ;   // die Tabelle ist komplett ausgefuellt
+
 	}
   
 
