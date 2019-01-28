@@ -125,46 +125,47 @@ public class Student implements Nutzer{
          * Konfiguration 1 : 8 GB Ram, i5, 256 SSD, 1 TeraBab  HDD, ab 1000 Euro
          * Konfiguration 1 : 16 GB Ram, i7, 256 SSD,2 TeraB, ab 1500 Euro */
     	
-    laptopDataBase[1][0] = "1,>= 7 Stunden,<= 2 Kg,true,false"  ;     laptopDataBase[1][1] =  "..." ;
-    laptopDataBase[2][0] = "1,< 7 Stunden,<= 2 Kg,true,false"  ;      laptopDataBase[2][1] =  "..." ;
-    laptopDataBase[3][0] = "1,>= 7 Stunden,> 2 Kg,true,false" ;		  laptopDataBase[3][1] =  "..." ;
-    laptopDataBase[4][0] = "1,< 7 Stunden,> 2 Kg,true,false" ;	      laptopDataBase[4][1] =  "..." ;
-    laptopDataBase[5][0] = "1,>= 7 Stunden,<= 2 Kg,false,true" ;      laptopDataBase[5][1] =  "..." ;
-    laptopDataBase[6][0] = "1,< 7 Stunden,> 2 Kg,false,true" ;        laptopDataBase[6][1] =  "..." ;
-    laptopDataBase[7][0] = "1,< 7 Stunden,<= 2 Kg,false,true"  ;      laptopDataBase[7][1] =  "..." ;
-    laptopDataBase[8][0] = "1,>= 7 Stunden,<= 2 Kg,false,true";       laptopDataBase[8][1] =  "..."	;
-    laptopDataBase[9][0] = "1,>= 7 Stunden,<= 2 Kg,false,false" ;     laptopDataBase[9][1] =  "..." ;
-    laptopDataBase[10][0] = "1,< 7 Stunden,> 2 Kg,false,false," ;     laptopDataBase[10][1] = "..." ;
-    laptopDataBase[11][0] = "1,< 7 Stunden,<= 2 Kg,false,false" ;     laptopDataBase[11][1] = "..." ;
-    laptopDataBase[12][0] = "1,>= 7 Stunden,<= 2 Kg,false,false" ;    laptopDataBase[12][1] = "..." ;
-    
-    
-    laptopDataBase[13][0] = "2,>= 7 Stunden,<= 2 Kg,true,false"  ;    laptopDataBase[13][1] = "..."  ;
-    laptopDataBase[14][0] = "2,< 7 Stunden,<= 2 Kg,true,false"  ;     laptopDataBase[14][1] = "..."  ;
-    laptopDataBase[15][0] = "2,>= 7 Stunden,> 2 Kg,true,false" ;      laptopDataBase[15][1] = "..."  ;
-    laptopDataBase[16][0] = "2,< 7 Stunden,> 2 Kg,true,false" ;       laptopDataBase[16][1] = "..."  ;
-    laptopDataBase[17][0] = "2,>= 7 Stunden,<= 2 Kg,false,true" ;     laptopDataBase[17][1] = "..."  ;
-    laptopDataBase[18][0] = "2,< 7 Stunden,> 2 Kg,false,true" ;       laptopDataBase[18][1] = "..."  ;
-    laptopDataBase[19][0] = "2,< 7 Stunden,<= 2 Kg,false,true"  ;     laptopDataBase[19][1] = "..."  ;
-    laptopDataBase[20][0] = "2,>= 7 Stunden,<= 2 Kg,false,true";      laptopDataBase[20][1] = "..."  ;
-    laptopDataBase[21][0] = "2,>= 7 Stunden,<= 2 Kg,false,false" ;    laptopDataBase[21][1] = "..."  ;
-    laptopDataBase[22][0] = "2,< 7 Stunden,> 2 Kg,false,false," ;     laptopDataBase[22][1] = "..."  ;
-    laptopDataBase[23][0] = "2,< 7 Stunden,<= 2 Kg,false,false" ;     laptopDataBase[23][1] = "..."  ;
-    laptopDataBase[24][0] = "2,>= 7 Stunden,<= 2 Kg,false,false" ;    laptopDataBase[24][1] = "..."  ;
-    
-    
-    laptopDataBase[25][0] = "4,>= 7 Stunden,<= 2 Kg,true,false"  ;    laptopDataBase[25][1] = "..."  ;
-    laptopDataBase[26][0] = "4,< 7 Stunden,<= 2 Kg,true,false"  ;     laptopDataBase[26][1] = "..."  ;
-    laptopDataBase[27][0] = "4,>= 7 Stunden,> 2 Kg,true,false" ;      laptopDataBase[27][1] = "..."  ;
-    laptopDataBase[28][0] = "4,< 7 Stunden,> 2 Kg,true,false" ;       laptopDataBase[28][1] = "..."  ;
-    laptopDataBase[29][0] = "4,>= 7 Stunden,<= 2 Kg,false,true" ;     laptopDataBase[29][1] = "..."  ;
-    laptopDataBase[30][0] = "4,< 7 Stunden,> 2 Kg,false,true" ;       laptopDataBase[30][1] = "..."  ;
-    laptopDataBase[31][0] = "4,< 7 Stunden,<= 2 Kg,false,true"  ;     laptopDataBase[31][1] = "..."  ;
-    laptopDataBase[32][0] = "4,>= 7 Stunden,<= 2 Kg,false,true";      laptopDataBase[32][1] = "..."  ;
-    laptopDataBase[33][0] = "4,>= 7 Stunden,<= 2 Kg,false,false" ;    laptopDataBase[33][1] = "..."  ;
-    laptopDataBase[34][0] = "4,< 7 Stunden,> 2 Kg,false,false," ;     laptopDataBase[34][1] = "..."  ;
-    laptopDataBase[35][0] = "4,< 7 Stunden,<= 2 Kg,false,false" ;     laptopDataBase[35][1] = "..."  ;
-    laptopDataBase[36][0] = "4,>= 7 Stunden,<= 2 Kg,false,false" ;    laptopDataBase[36][1] = "..."  ;      // die Tabelle ist komplett ausgefuellt
+    laptopDataBase[1][0] = "1,>= 7 Stunden,<= 2 Kg,true,false"  ;     laptopDataBase[1][1] =  "Acer Spin 3 Convertible Notebook 14 Touch FHD IPS" ;  
+	    laptopDataBase[2][0] = "1,< 7 Stunden,<= 2 Kg,true,false"  ;      laptopDataBase[2][1] =  "Lenovo Yoga 530-14IKB 81EK00XMGE 14" ;  				 
+	    laptopDataBase[3][0] = "1,>= 7 Stunden,> 2 Kg,true,false" ;		  laptopDataBase[3][1] =  "LENOVO Miix 510 , Intel Core Silber" ;  				 
+	    laptopDataBase[4][0] = "1,< 7 Stunden,> 2 Kg,true,false" ;	      laptopDataBase[4][1] =  "Lenovo super Yoga 530-14IKB 81EK00XQGE" ;  			 
+	    laptopDataBase[5][0] = "1,>= 7 Stunden,<= 2 Kg,false,true" ;      laptopDataBase[5][1] =  "HP 15-bs178ng, Notebook, Core" ;  					 
+	    laptopDataBase[6][0] = "1,< 7 Stunden,> 2 Kg,false,true" ;        laptopDataBase[6][1] =  "Acer Swift 3  Mega Thin 14" ;  						 
+	    laptopDataBase[7][0] = "1,< 7 Stunden,<= 2 Kg,false,true"  ;      laptopDataBase[7][1] =  "Acer Swift 3 (SF315-52-37YA) Ultra Thin 15,6" ;      
+	    laptopDataBase[8][0] = "1,>= 7 Stunden,<= 2 Kg,false,true";       laptopDataBase[8][1] =  "Acer Swift 1 Ultra Thin (SF114-32-P7F1) 14"	;       
+	    laptopDataBase[9][0] = "1,>= 7 Stunden,<= 2 Kg,false,false" ;     laptopDataBase[9][1] =  "TREKSTOR PRIMEBOOK C11B-CO" ;  						
+	    laptopDataBase[10][0] = "1,< 7 Stunden,> 2 Kg,false,false," ;     laptopDataBase[10][1] = "ASUS R702MA-BX089T" ;  								
+	    laptopDataBase[11][0] = "1,< 7 Stunden,<= 2 Kg,false,false" ;     laptopDataBase[11][1] = "MEDION MEDION® AKOYA® E6245" ;  						
+	    laptopDataBase[12][0] = "1,>= 7 Stunden,<= 2 Kg,false,false" ;    laptopDataBase[12][1] = "LENOVO IdeaPad 330" ;  								 
+	    
+	    
+	    laptopDataBase[13][0] = "2,>= 7 Stunden,<= 2 Kg,true,false"  ;    laptopDataBase[13][1] = "Acer Switch Alpha 12 Fit (SA5-271-FIT) + Acer Active Stift 12"  ;  
+	    laptopDataBase[14][0] = "2,< 7 Stunden,<= 2 Kg,true,false"  ;     laptopDataBase[14][1] = "HP Envy x360  IPS Touch, AMD Ryzen"  ;  							  
+	    laptopDataBase[15][0] = "2,>= 7 Stunden,> 2 Kg,true,false" ;      laptopDataBase[15][1] = "HP ENVY x360 15-cp0002ng 15,6"  ;  								  	
+	    laptopDataBase[16][0] = "2,< 7 Stunden,> 2 Kg,true,false" ;       laptopDataBase[16][1] = "HP ENVY cp0001ng 15"  ;  										 
+	    laptopDataBase[17][0] = "2,>= 7 Stunden,<= 2 Kg,false,true" ;     laptopDataBase[17][1] = "Apple MacBook Air 13\" MQD32D/A Intel Core i5 "  ; 				
+	    laptopDataBase[18][0] = "2,< 7 Stunden,> 2 Kg,false,true" ;       laptopDataBase[18][1] = "Asus Zenbook UX530UX-FY011T / 15,6"  ;  							 
+	    laptopDataBase[19][0] = "2,< 7 Stunden,<= 2 Kg,false,true"  ;     laptopDataBase[19][1] = "MICROSOFT Surface Laptop 2, Notebook, Core"  ;  					 
+	    laptopDataBase[20][0] = "2,>= 7 Stunden,<= 2 Kg,false,true";      laptopDataBase[20][1] = "ACER Swift 5 (SF515-51T-7828), Notebook, Core"  ;  				 
+	    laptopDataBase[21][0] = "2,>= 7 Stunden,<= 2 Kg,false,false" ;    laptopDataBase[21][1] = "LENOVO IdeaPad 320, Notebook  15.6 "  ;  						 
+	    laptopDataBase[22][0] = "2,< 7 Stunden,> 2 Kg,false,false," ;     laptopDataBase[22][1] = "LENOVO IdeaPad 330, Notebook, A9"  ;  							 
+	    laptopDataBase[23][0] = "2,< 7 Stunden,<= 2 Kg,false,false" ;     laptopDataBase[23][1] = "TREKSTOR PRIMEBOOK P13 13,3"  ;  								 
+	    laptopDataBase[24][0] = "2,>= 7 Stunden,<= 2 Kg,false,false" ;    laptopDataBase[24][1] = "Asus Zenbook UX530UX-FY011T"  ;  								 
+	   
+	    
+	    laptopDataBase[25][0] = "4,>= 7 Stunden,<= 2 Kg,true,false"  ;    laptopDataBase[25][1] = "ACER Swift 5 (SF515-51T-7828) Notebook Core"  ;
+	    laptopDataBase[26][0] = "4,< 7 Stunden,<= 2 Kg,true,false"  ;     laptopDataBase[26][1] = "Asus Zenbook Flip 15 Intel Core"  ; 
+	    laptopDataBase[27][0] = "4,>= 7 Stunden,> 2 Kg,true,false" ;      laptopDataBase[27][1] = "HP Spectre x360 UHD Touch"  ; 
+	    laptopDataBase[28][0] = "4,< 7 Stunden,> 2 Kg,true,false" ;       laptopDataBase[28][1] = "HP ENVY  15  Core GeForceMX Dark Ash "  ;  
+	    laptopDataBase[29][0] = "4,>= 7 Stunden,<= 2 Kg,false,true" ;     laptopDataBase[29][1] = "DELL XPS 13 9370  Core Intel  Platinum"  ;  
+	    laptopDataBase[30][0] = "4,< 7 Stunden,> 2 Kg,false,true" ;       laptopDataBase[30][1] = "RAZER Blade Stealth 13  Notebook Core Intel UHD-Grafik"  ; 
+	    laptopDataBase[31][0] = "4,< 7 Stunden,<= 2 Kg,false,true"  ;     laptopDataBase[31][1] = "Microsoft Surface Pro 6  Core platingrau Surface Pro Signature"  ;  
+	    laptopDataBase[32][0] = "4,>= 7 Stunden,<= 2 Kg,false,true";      laptopDataBase[32][1] = "Lenovo ThinkPad L580  Intel Core  LTE Windows 10 Pro"  ;  
+	    laptopDataBase[33][0] = "4,>= 7 Stunden,<= 2 Kg,false,false" ;    laptopDataBase[33][1] = "ACER Swift 5 (SF515-51T-7828), Notebook Core"  ;  
+	    laptopDataBase[34][0] = "4,< 7 Stunden,> 2 Kg,false,false," ;     laptopDataBase[34][1] = "HP ProBook 450 G5 4QW89EA 15,6 FHD IPS Intel Core" ;
+	    laptopDataBase[35][0] = "4,< 7 Stunden,<= 2 Kg,false,false" ;     laptopDataBase[35][1] = "Lenovo ThinkPad L580 Intel Core  Windows 10 Pro" ;  
+	    laptopDataBase[36][0] = "4,>= 7 Stunden,<= 2 Kg,false,false" ;    laptopDataBase[36][1] = "HP EliteBook 840 G5 4QZ38EA 14 SureView" ;       // die Tabelle ist komplett ausgefuellt
+	    
     }
     
      
