@@ -30,12 +30,21 @@ public class Gamer implements Nutzer{
 		switch(frageCounter) {
 			case 0:
 				leuchten = (answerAsInt == 1) ? "true" : "false";
+				 frageCounter++;
 				break;
 			case 1:
-				aktuell = (answerAsInt == 1) ? "true" : "false";
+				if (answerAsInt == 1) {
+					aktuell = "true"; 
+					//noMoreQuestions = true;
+				}
+				else {
+					aktuell = "false"; 
+					//frageCounter++;
+				}		
+				frageCounter++;
 				break;
 			case 2:
-				bildschirm = (answerAsInt == 1) ? "klein" : "gross";
+				bildschirm = (answerAsInt == 1) ? "gross" : "klein";
 				noMoreQuestions = true;
 				break;
 			default: 
@@ -53,31 +62,28 @@ public class Gamer implements Nutzer{
 	}
 	
 	public void listAusfuellen() {
-		laptopDataBase[0][0] = "false,false,klein";	laptopDataBase[0][1]="...";
-		laptopDataBase[1][0] = "false,true,klein"; 	laptopDataBase[1][1]="...";
-		laptopDataBase[2][0] = "true,false,klein";	laptopDataBase[2][1]="...";
-		laptopDataBase[3][0] = "true,true,klein";	laptopDataBase[3][1]="...";
-		laptopDataBase[4][0] = "false,false,gross";	laptopDataBase[4][1]="...";
-		laptopDataBase[5][0] = "false,true,gross"; 	laptopDataBase[5][1]="...";
-		laptopDataBase[6][0] = "true,false,gross";	laptopDataBase[6][1]="...";
-		laptopDataBase[7][0] = "true,true,gross";	laptopDataBase[7][1]="...";
+		laptopDataBase[0][0] = "false,false,klein";	laptopDataBase[0][1]="Acer Aspire E15";
+		laptopDataBase[1][0] = "false,true,klein"; 	laptopDataBase[1][1]="Asus FX565";
+		laptopDataBase[2][0] = "true,false,klein";	laptopDataBase[2][1]="Acer Nitro 5";
+		laptopDataBase[3][0] = "true,true,klein";	laptopDataBase[3][1]="Acer Predator Helios 300";
+		laptopDataBase[4][0] = "false,false,gross";	laptopDataBase[4][1]="DELL G3 17";
+		laptopDataBase[5][0] = "false,true,gross"; 	laptopDataBase[5][1]="In dieser Kategorie hat jedes Laptop eine beleuchtete Tastatur, deshal den Razer Blade 15";
+		laptopDataBase[6][0] = "true,false,gross";	laptopDataBase[6][1]="MSI GL72M";
+		laptopDataBase[7][0] = "true,true,gross";	laptopDataBase[7][1]="Razer Blade 15";
 	}
 
 	public String selectQuestion() {
 	        String question;
 	        switch(frageCounter){
 	            case 0:
-	                question ="Moechtest du eine beleuchtete Tastatur haben?";
-	                frageCounter++;
+	                question ="Moechtest du eine beleuchtete Tastatur haben?";	               
 	                break;
 	            case 1:
 	                question = "Moechtest du auch aktuelle Spiele spielen?";
-	                frageCounter++;
 	                break;
 	        
 	            case 2:
 	            	question = "Moechtest du einen grossen Bildschirm haben?";
-	            	frageCounter++;
 	            	break;
 	            default:
 	                question = "Der frageCounter ist kleiner 0 oder groesser 2!";
