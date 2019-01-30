@@ -38,7 +38,7 @@ public class Student implements Nutzer {
 			break;
 
 		case 2:
-			frage = "Arbeitest du viel am Laptop ohne eine Steckdose in der Nähe ?";
+			frage = "Arbeitest du viel am Laptop ohne eine Steckdose in der Naehe ?";
 			break;
 
 		case 3:
@@ -68,10 +68,10 @@ public class Student implements Nutzer {
 		case 0:
 			if (answerAsInt == 1) {
 				konfiguration = "2";
-				++frageCounter;
+				frageCounter++;
 			} else if (answerAsInt == 0) {
 				konfiguration = "1";
-				frageCounter = +2;
+				frageCounter++;
 			}
 			break;
 		case 1:
@@ -133,12 +133,11 @@ public class Student implements Nutzer {
 	public void listAusfuellen() { // Diese Methode fÃ¼llt unsere Database einfach .
 
 		/*
-		 * laptopDataBase[i][0] =
-		 * "Konfiguration,Akkulaufzeit,Gewicht,Konvertible,Touchscreem" ;
-		 * //laptopDataBase[i][1] = "Notebook" ; Konfiguration 1 : 4 GB Ram, i3, 256
-		 * SSD, ab 370 Euro Konfiguration 2 : 8 GB Ram, i5, 256 SSD, 1 TeraB HDD, ab 530
-		 * Euro Konfiguration 1 : 8 GB Ram, i5, 256 SSD, 1 TeraBab HDD, ab 1000 Euro
-		 * Konfiguration 1 : 16 GB Ram, i7, 256 SSD,2 TeraB, ab 1500 Euro
+		 * laptopDataBase[i][0] = "Konfiguration,Akkulaufzeit,Gewicht,Konvertible,Touchscreen" ;
+		 * //laptopDataBase[i][1] = "Notebook" ; Konfiguration 1 : 4 GB Ram, i3, 256 SSD, ab 370 Euro 
+		 * Konfiguration 2 : 8 GB Ram, i5, 256 SSD, 1 TeraB HDD, ab 530 Euro 
+		 * Konfiguration 3 : 8 GB Ram, i5, 256 SSD, 1 TeraBab HDD, ab 1000 Euro
+		 * Konfiguration 4 : 16 GB Ram, i7, 256 SSD,2 TeraB, ab 1500 Euro
 		 */
 
 		laptopDataBase[1][0] = "1,>= 7 Stunden,<= 2 Kg,true,false";			laptopDataBase[1][1] = "Acer Spin 3 Convertible Notebook 14 Touch FHD IPS";
