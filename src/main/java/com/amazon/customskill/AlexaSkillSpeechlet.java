@@ -1,4 +1,5 @@
 /**
+ /**
     Copyright 2014-2015 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
     Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at
@@ -43,7 +44,8 @@ public class AlexaSkillSpeechlet implements SpeechletV2 {
 	int minimumPrice = 370;
 	boolean lowBudget = false;
 	Nutzer nutzer;
-	
+	Synonymfinder Synonym = new Synonymfinder();
+
 	int groupCounter = 0;
 
 	static Logger logger = LoggerFactory.getLogger(AlexaSkillSpeechlet.class);
@@ -68,20 +70,20 @@ public class AlexaSkillSpeechlet implements SpeechletV2 {
 		IntentRequest request = requestEnvelope.getRequest();
 
 		Intent intent = request.getIntent();
-		
+
 		userRequest = intent.getSlot("Alles").getValue();
-		if (userRequest.equalsIgnoreCase("abbrechen")) {
+		if (Synonym.erkenneSynonym(userRequest).equalsIgnoreCase("abbrechen")) {
 			return endResponse("Beratung abgebrochen!");
 		}
-		
+
 		if (lastQuestion.equalsIgnoreCase("Wie viel moechtest du maximal ausgeben?")) {
-			budget = stringToNumber(userRequest);
+//			budget = stringToNumber(userRequest);
 			lastQuestion = "";
-			if (budget < minimumPrice) {
-				lowBudget = true;
-				return askUserResponse(
-						"Dein Budget liegt unterhalb des Preises meiner Minimalkonfiguration! Daher werde ich dir keinen Laptop innerhalb deines Budgets empfehlen koennen. Moechtest du die Beratung dennoch Fortsetzen?");
-			}
+//			if (budget < minimumPrice) {
+//				lowBudget = true;
+//				return askUserResponse(
+//						"Dein Budget liegt unterhalb des Preises meiner Minimalkonfiguration! Daher werde ich dir keinen Laptop innerhalb deines Budgets empfehlen koennen. Moechtest du die Beratung dennoch Fortsetzen?");
+//			}
 			return askUserResponse(nutzer.selectQuestion());
 		}
 
@@ -91,30 +93,31 @@ public class AlexaSkillSpeechlet implements SpeechletV2 {
 			return askUserResponse(group);
 		}
 		if (counter != 0 && lastQuestion.equals("")) {
-			int answerAsInt = analyseAnswer(userRequest);//Analysiere die Antwort und gibt bei nein 0 ja 1 und sonst 2 zurück
-			if(lowBudget && answerAsInt  == 1) {
+			int answerAsInt = analyseAnswer(userRequest);// Analysiere die Antwort und gibt bei nein 0 ja 1 und sonst 2
+															// zurück
+			if (lowBudget && answerAsInt == 1) {
 				lowBudget = false;
 				return askUserResponse(nutzer.selectQuestion());
-			}else if(lowBudget && answerAsInt == 0)
-				return endResponse("Okay. Ich empfehle dir, noch etwas Geld zu sparen, oder dich auf dem Gebrauchtmarkt umzusehen! Die Beratung wird jetzt beendet!");
-				
-			if(userRequest.equalsIgnoreCase("beratung �berspringen")) {
+			} else if (lowBudget && answerAsInt == 0)
+				return endResponse(
+						"Okay. Ich empfehle dir, noch etwas Geld zu sparen, oder dich auf dem Gebrauchtmarkt umzusehen! Die Beratung wird jetzt beendet!");
+
+			if (userRequest.equalsIgnoreCase("beratung �berspringen")) {
 				return endResponse(nutzer.getLaptopFromAnswers());
 			}
-			
-			
+
 			nutzer.takeAnswer(answerAsInt);
 			if (!nutzer.getNoMoreQuestions()) {
 				String question = nutzer.selectQuestion();
 				return askUserResponse(question);
-			}else {
+			} else {
 				String laptop = nutzer.getLaptopFromAnswers();
 				return endResponse(laptop);
 			}
 		}
 
-			logger.info("Received following text: [" + userRequest + "]");
-			return askUserResponse("Diese Ausgabe haette nicht ausgegeben werden duerfen!");
+		logger.info("Received following text: [" + userRequest + "]");
+		return askUserResponse("Diese Ausgabe haette nicht ausgegeben werden duerfen!");
 	}
 
 	public int analyseAnswer(String answer) { // Antwort analysieren
@@ -126,14 +129,10 @@ public class AlexaSkillSpeechlet implements SpeechletV2 {
 			cuttedanswer[i] = token.nextToken();
 		}
 		for (int i = 0; i < length; i++) { // alle Wörter durchgehen und auf ja und nein überprüfen
-			if (cuttedanswer[i].equalsIgnoreCase("ja") || cuttedanswer[i].equalsIgnoreCase("genau")
-					|| cuttedanswer[i].equalsIgnoreCase("exakt") || cuttedanswer[i].equalsIgnoreCase("jeden")
-					|| cuttedanswer[i].equalsIgnoreCase("immer")) {
+			if (Synonym.erkenneSynonym(cuttedanswer[i]).equalsIgnoreCase("ja")) {
 				analysedanswer = 1; // case answer ja
 			}
-			if (cuttedanswer[i].equalsIgnoreCase("nein") || cuttedanswer[i].equalsIgnoreCase("keinen")
-					|| cuttedanswer[i].equalsIgnoreCase("niemals") || cuttedanswer[i].equalsIgnoreCase("ne")
-					|| cuttedanswer[i].equalsIgnoreCase("keine")) {
+			if (Synonym.erkenneSynonym(cuttedanswer[i]).equalsIgnoreCase("nein")) {
 				analysedanswer = 0;// case answer nein
 			}
 		}
@@ -143,37 +142,30 @@ public class AlexaSkillSpeechlet implements SpeechletV2 {
 	public String selectGroup(String group) {
 
 		String firstQuestion;
+		group = Synonym.erkenneSynonym(group).toLowerCase();
 
-		switch (group) {
-		case "student":
+		if (group.equalsIgnoreCase("student")) {
 			nutzer = new Student();
 			firstQuestion = "Wie viel moechtest du maximal ausgeben?";
 			counter++;
-			break;
-		case "sch�ler":
+		} else if (group.equalsIgnoreCase("schueler")) {
 			nutzer = new Schueler();
 			firstQuestion = "Wie viel moechtest du maximal ausgeben?";
 			counter++;
-			break;
-		case "senior":
+		} else if (group.equalsIgnoreCase("senior")) {
 			nutzer = new Senioren();
 			firstQuestion = "Wie viel moechtest du maximal ausgeben?";
 			counter++;
-			break;
-		case "gamer":
+		} else if (group.equalsIgnoreCase("gamer")) {
 			nutzer = new Gamer();
 			firstQuestion = "Wie viel moechtest du maximal ausgeben?";
 			counter++;
-			break;
-		case "privatnutzer":
+		} else if (group.equalsIgnoreCase("privatnutzer")) {
 			nutzer = new PrivatNutzer();
 			firstQuestion = "Wie viel moechtest du maximal ausgeben?";
 			counter++;
-			break;
-		default:
+		} else
 			firstQuestion = "Bitte eine der folgenden Kategorien waehlen: Privatnutzer, Student, Schueler, Gamer oder Senior!";
-			break;
-		}
 		lastQuestion = firstQuestion;
 		return firstQuestion;
 	}
@@ -212,12 +204,7 @@ public class AlexaSkillSpeechlet implements SpeechletV2 {
 	 */
 	private SpeechletResponse getWelcomeResponse() {
 		return askUserResponse(
-				"Willkommen bei der Notebookberatung durch Alexa! Ich werde dir eine Reihe an Fragen stellen und an Hand deiner Antworten werde ich dir eine Liste von zu dir passenden Laptops ausgeben! Zu welcher der folgenden Nutzergruppen wird der Nutzer des Geraetes gehoeren? Ist er ein Student, ein Schueler, ein Senior, ein Privatnutzer oder ein Gamer?");
-		// return askUserResponse("<amazon:effect name=\"whispered\">Hey
-		// Leute</amazon:effect>, ich bin ein <phoneme alphabet=\"ipa\"
-		// ph=\"ËˆfÊŒni\">funny</phoneme> Nomen <phoneme alphabet=\"ipa\"
-		// ph=\"bÉ’t\">bot</phoneme>! Sag einen Satz und ich nenne dir die enthaltenen
-		// Nomen");
+				"Willkommen bei der Notebookberatung durch Alexa! Ich werde dir eine Reihe an Fragen stellen und an Hand deiner Antworten werde ich dir eine Liste von zu dir passenden Laptops ausgeben! Zu welcher der folgenden Nutzergruppen gehoerst du? Bist du ein Student, ein Schueler, ein Senior, ein Privatnutzer oder ein Gamer?");
 	}
 
 	/**

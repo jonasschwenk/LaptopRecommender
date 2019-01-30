@@ -29,23 +29,35 @@ public class Gamer implements Nutzer{
 	public void takeAnswer(int answerAsInt) {
 		switch(frageCounter) {
 			case 0:
-				leuchten = (answerAsInt == 1) ? "true" : "false";
-				 frageCounter++;
+//				leuchten = (answerAsInt == 1) ? "true" : "false";
+				if(answerAsInt == 1) {
+					leuchten = "true";	
+					frageCounter++;
+				}
+				else if(answerAsInt == 0) {
+					leuchten = "false";
+					frageCounter++;
+				}
 				break;
 			case 1:
 				if (answerAsInt == 1) {
-					aktuell = "true"; 
-					//noMoreQuestions = true;
+					aktuell = "true";
+					frageCounter++;
 				}
-				else {
+				else if(answerAsInt == 0) {
 					aktuell = "false"; 
-					//frageCounter++;
-				}		
-				frageCounter++;
+					frageCounter++;
+				}
 				break;
 			case 2:
-				bildschirm = (answerAsInt == 1) ? "gross" : "klein";
-				noMoreQuestions = true;
+				if(answerAsInt == 1) {
+					bildschirm = "gross";
+					noMoreQuestions = true;
+				}
+				else if(answerAsInt == 0) {
+					bildschirm = "klein";
+					noMoreQuestions = true;
+				}				
 				break;
 			default: 
 				break;
@@ -62,15 +74,15 @@ public class Gamer implements Nutzer{
 	}
 	
 	public void listAusfuellen() {
-		laptopDataBase[0][0] = "false,false,klein";	laptopDataBase[0][1]="Acer Aspire E15";
-		laptopDataBase[1][0] = "false,true,klein"; 	laptopDataBase[1][1]="Asus FX565";
-		laptopDataBase[2][0] = "true,false,klein";	laptopDataBase[2][1]="Acer Nitro 5";
-		laptopDataBase[3][0] = "true,true,klein";	laptopDataBase[3][1]="Acer Predator Helios 300";
-		laptopDataBase[4][0] = "false,false,gross";	laptopDataBase[4][1]="DELL G3 17";
-		laptopDataBase[5][0] = "false,true,gross"; 	laptopDataBase[5][1]="In dieser Kategorie hat jedes Laptop eine beleuchtete Tastatur, deshal den Razer Blade 15";
-		laptopDataBase[6][0] = "true,false,gross";	laptopDataBase[6][1]="MSI GL72M";
-		laptopDataBase[7][0] = "true,true,gross";	laptopDataBase[7][1]="Razer Blade 15";
-	}
+		laptopDataBase[0][0] = "false,false,klein";		laptopDataBase[0][1]="Acer Aspire E15";
+		laptopDataBase[1][0] = "false,true,klein"; 		laptopDataBase[1][1]="Asus FX565";
+		laptopDataBase[2][0] = "true,false,klein";		laptopDataBase[2][1]="Acer Nitro 5";
+		laptopDataBase[3][0] = "true,true,klein";		laptopDataBase[3][1]="Acer Predator Helios 300";
+		laptopDataBase[4][0] = "false,false,gross";		laptopDataBase[4][1]="DELL G3 17";
+		laptopDataBase[5][0] = "false,true,gross"; 		laptopDataBase[5][1]="In dieser Kategorie hat jedes Laptop eine beleuchtete Tastatur, deshalb empfehle ich dir den Razer Blade 15";
+		laptopDataBase[6][0] = "true,false,gross";		laptopDataBase[6][1]="MSI GL72M";
+		laptopDataBase[7][0] = "true,true,gross";		laptopDataBase[7][1]="Razer Blade 15";
+	}	
 
 	public String selectQuestion() {
 	        String question;
