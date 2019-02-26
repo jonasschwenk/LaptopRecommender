@@ -6,13 +6,13 @@ public class PrivatNutzer implements Nutzer {
 
 	protected String[][] laptopDataBase = new String[8][2];
 
-	protected String completteAnfrage = "";
 	private int frageCounter = 0;
 
 	// Spezifikationen
-	private String convertible = "true";
+	private String convertible = "false";
 	private String laufwerk = "true";
 	private String blueRayLaufwerk = "false";
+	protected String kompletteAnfrage = convertible + "," + laufwerk + "," + blueRayLaufwerk;
 
 	private boolean noMoreQuestions = false;
 
@@ -28,27 +28,16 @@ public class PrivatNutzer implements Nutzer {
 		return frageCounter;
 	}
 
-	public void setFrageCounter(int frageCounter) {
-		this.frageCounter = frageCounter;
-	}
-//	public int getAnswers (int index) {
-//		return answers[index];
-//	}
-//	public void setAnswers (int index, int value) {
-//		answers[index] = value;
-//	}
-
 	public String selectQuestion() {
 		String question = "";
-		;
 		switch (frageCounter) {
-		case 1:
+		case 0:
 			question = "Moechtest du ein Covertible haben, sprich soll man die Tastatur abnehmen koennen?";
 			break;
-		case 2:
+		case 1:
 			question = "Benoetigst du ein Laufwerk?";
 			break;
-		case 3:
+		case 2:
 			question = "Moechtest du ein Blue Ray abspielen koennen?";
 			break;
 
@@ -95,7 +84,7 @@ public class PrivatNutzer implements Nutzer {
 		default:
 			break;
 		}
-		completteAnfrage = convertible + "," + laufwerk + "," + blueRayLaufwerk;
+		kompletteAnfrage = convertible + "," + laufwerk + "," + blueRayLaufwerk;
 	}
 
 	public void listAusfuellen() {
@@ -110,7 +99,7 @@ public class PrivatNutzer implements Nutzer {
 	public String getLaptopFromAnswers() {
 		// array durchgehen und mit anfrage vergleichen
 		for (int i = 0; i <= laptopDataBase.length; i++)
-			if (completteAnfrage.equals(laptopDataBase[i][0]))
+			if (kompletteAnfrage.equals(laptopDataBase[i][0]))
 				return laptopDataBase[i][1];
 		return "error";
 	}

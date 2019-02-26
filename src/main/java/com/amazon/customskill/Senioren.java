@@ -3,7 +3,6 @@ package com.amazon.customskill;
 public class Senioren implements Nutzer {
 
 	private String[][] laptopDataBase = new String[4][2];
-	String completteAnfrage = "";
 	int frageCounter = 0;
 
 	private boolean noMoreQuestions = false;
@@ -13,8 +12,9 @@ public class Senioren implements Nutzer {
 	}
 
 	// Spezifikationen
-	String Gewicht = "";
-	String Bildschirm = "";
+	String Gewicht = "<= 2kg";
+	String Bildschirm = "grosser bildschirm";
+	String kompletteAnfrage = Gewicht + "," + Bildschirm;
 
 	public Senioren() {
 		listAusfuellen();
@@ -48,15 +48,15 @@ public class Senioren implements Nutzer {
 			break;
 		case 1:
 			if (answerAsInt == 1) {
-				Bildschirm = "grosses bildschirm";
+				Bildschirm = "grosser bildschirm";
 				noMoreQuestions = true;
 			} else if (answerAsInt == 0) {
-				Bildschirm = "normales bildschirm";
+				Bildschirm = "normaler bildschirm";
 				noMoreQuestions = true;
 			}
 			break;
 		}
-		completteAnfrage = Gewicht + "," + Bildschirm;
+		kompletteAnfrage = Gewicht + "," + Bildschirm;
 	}
 
 	public void listAusfuellen() { // Diese Methode fuellt unsere Database.
@@ -64,17 +64,17 @@ public class Senioren implements Nutzer {
 		// laptopDataBase[i][0] = "Gewicht, Bildschirm grosse" ; //laptopDataBase[i][1]
 		// = "Notebook" ;
 
-		laptopDataBase[0][0] = "<= 2kg,grosses bildschirm";			laptopDataBase[0][1] = "Lenovo  Win 10";
-		laptopDataBase[1][0] = "<= 2kg,normales bildschirm";		laptopDataBase[1][1] = "HP 15 IPS M Win10";
-		laptopDataBase[2][0] = "> 2kg,grosses bildschirm";			laptopDataBase[2][1] = "HP 17-by0101ng Intel Core Win10";
-		laptopDataBase[3][0] = "> 2kg,normales bildschirm";			laptopDataBase[3][1] = "Lenovo Ideapad Win1"; // die Tabelle ist komplett ausgefuellt
+		laptopDataBase[0][0] = "<= 2kg,grosser bildschirm";			laptopDataBase[0][1] = "Lenovo  Win 10";
+		laptopDataBase[1][0] = "<= 2kg,normaler bildschirm";		laptopDataBase[1][1] = "HP 15 IPS M Win10";
+		laptopDataBase[2][0] = "> 2kg,grosser bildschirm";			laptopDataBase[2][1] = "HP 17-by0101ng Intel Core Win10";
+		laptopDataBase[3][0] = "> 2kg,normaler bildschirm";			laptopDataBase[3][1] = "Lenovo Ideapad Win1"; // die Tabelle ist komplett ausgefuellt
 
 	}
 
 	public String getLaptopFromAnswers() {
 		// array durchgehen und mit anfrage vergleichen
 		for (int i = 0; i <= laptopDataBase.length; i++)
-			if (completteAnfrage.equals(laptopDataBase[i][0]))
+			if (kompletteAnfrage.equals(laptopDataBase[i][0]))
 				return laptopDataBase[i][1];
 		return "error";
 	}

@@ -14,7 +14,7 @@ public class Schueler implements Nutzer {
 	// Spezifikationen
 	private String konfiguration = "1";
 	private String convertible = "false";
-	private String kompletteAnfrage = "";
+	private String kompletteAnfrage = konfiguration + "," + convertible;
 
 	public Schueler() {
 		listAusfuellen();

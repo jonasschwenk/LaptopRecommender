@@ -62,6 +62,10 @@ public class AlexaSkillSpeechlet implements SpeechletV2 {
 
 	@Override
 	public SpeechletResponse onLaunch(SpeechletRequestEnvelope<LaunchRequest> requestEnvelope) {
+		if(nutzer != null) {
+			String question = nutzer.selectQuestion();
+			return askUserResponse(question);
+		}
 		return getWelcomeResponse();
 	}
 
@@ -72,18 +76,18 @@ public class AlexaSkillSpeechlet implements SpeechletV2 {
 		Intent intent = request.getIntent();
 
 		userRequest = intent.getSlot("Alles").getValue();
-		if (Synonym.erkenneSynonym(userRequest).equalsIgnoreCase("abbrechen")) {
+		if (userRequest.equalsIgnoreCase("abbrechen")) {
 			return endResponse("Beratung abgebrochen!");
 		}
 
 		if (lastQuestion.equalsIgnoreCase("Wie viel moechtest du maximal ausgeben?")) {
-//			budget = stringToNumber(userRequest);
+			budget = stringToNumber(userRequest);
 			lastQuestion = "";
-//			if (budget < minimumPrice) {
-//				lowBudget = true;
-//				return askUserResponse(
-//						"Dein Budget liegt unterhalb des Preises meiner Minimalkonfiguration! Daher werde ich dir keinen Laptop innerhalb deines Budgets empfehlen koennen. Moechtest du die Beratung dennoch Fortsetzen?");
-//			}
+			if (budget < minimumPrice) {
+				lowBudget = true;
+				return askUserResponse(
+						"Dein Budget liegt unterhalb des Preises meiner Minimalkonfiguration! Daher werde ich dir keinen Laptop innerhalb deines Budgets empfehlen koennen. Moechtest du die Beratung dennoch Fortsetzen?");
+			}
 			return askUserResponse(nutzer.selectQuestion());
 		}
 
@@ -142,13 +146,13 @@ public class AlexaSkillSpeechlet implements SpeechletV2 {
 	public String selectGroup(String group) {
 
 		String firstQuestion;
-		group = Synonym.erkenneSynonym(group).toLowerCase();
+//		group = Synonym.erkenneSynonym(group).toLowerCase();
 
 		if (group.equalsIgnoreCase("student")) {
 			nutzer = new Student();
 			firstQuestion = "Wie viel moechtest du maximal ausgeben?";
 			counter++;
-		} else if (group.equalsIgnoreCase("schueler")) {
+		} else if (group.equalsIgnoreCase("schüler")) {
 			nutzer = new Schueler();
 			firstQuestion = "Wie viel moechtest du maximal ausgeben?";
 			counter++;
@@ -233,6 +237,7 @@ public class AlexaSkillSpeechlet implements SpeechletV2 {
 	}
 
 	private SpeechletResponse endResponse(String text) {
+		nutzer = null;
 		SsmlOutputSpeech outputSpeech = new SsmlOutputSpeech();
 		outputSpeech.setSsml("<speak>" + text + "</speak>");
 		counter = 0;

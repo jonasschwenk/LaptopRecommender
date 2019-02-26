@@ -16,12 +16,12 @@ public class Student implements Nutzer {
 	}
 
 	//// Spezifikationen
-	private String konfiguration = "";
-	private String akkuLaufzeit = "";
-	private String gewicht = "";
-	private String convertible = "";
+	private String konfiguration = "1";
+	private String akkuLaufzeit = ">= 7 Stunden";
+	private String gewicht = "<= 2 Kg";
+	private String convertible = "true";
 	private String touchScreen = "false";
-	private String completteAnfrage = "";
+	private String kompletteAnfrage = konfiguration + "," + akkuLaufzeit + "," + gewicht + "," + convertible + "," + touchScreen;
 
 	public String selectQuestion() {
 
@@ -127,7 +127,7 @@ public class Student implements Nutzer {
 		default:
 			break;
 		}
-		completteAnfrage = konfiguration + "," + akkuLaufzeit + "," + gewicht + "," + convertible + "," + touchScreen;
+		kompletteAnfrage = konfiguration + "," + akkuLaufzeit + "," + gewicht + "," + convertible + "," + touchScreen;
 	}
 
 	public void listAusfuellen() { // Diese Methode fÃ¼llt unsere Database einfach .
@@ -184,7 +184,7 @@ public class Student implements Nutzer {
 	public String getLaptopFromAnswers() {
 		// array durchgehen und mit anfrage vergleichen
 		for (int i = 0; i <= laptopDataBase.length; i++)
-			if (completteAnfrage.equals(laptopDataBase[i][0]))
+			if (kompletteAnfrage.equals(laptopDataBase[i][0]))
 				return laptopDataBase[i][1];
 		return "error";
 	}
