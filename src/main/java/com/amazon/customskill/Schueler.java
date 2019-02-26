@@ -3,7 +3,7 @@ package com.amazon.customskill;
 public class Schueler implements Nutzer {
 
 	private int frageCounter = 0;
-	private String[][] laptopDataBase = new String[4][2];
+	private String[][] laptopDataBase = new String[3][2];
 
 	private boolean noMoreQuestions = false;
 

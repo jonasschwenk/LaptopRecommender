@@ -156,7 +156,7 @@ public class AlexaSkillSpeechlet implements SpeechletV2 {
 			nutzer = new Schueler();
 			firstQuestion = "Wie viel moechtest du maximal ausgeben?";
 			counter++;
-		} else if (group.equalsIgnoreCase("senior")) {
+		} else if (group.equalsIgnoreCase("senior") || userRequest.equalsIgnoreCase("senior")) { // Workaround weil DKPro senior nicht als Nomen erkennt
 			nutzer = new Senioren();
 			firstQuestion = "Wie viel moechtest du maximal ausgeben?";
 			counter++;

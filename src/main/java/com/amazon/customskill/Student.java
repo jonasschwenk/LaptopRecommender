@@ -183,7 +183,7 @@ public class Student implements Nutzer {
 
 	public String getLaptopFromAnswers() {
 		// array durchgehen und mit anfrage vergleichen
-		for (int i = 0; i <= laptopDataBase.length; i++)
+		for (int i = 1; i <= laptopDataBase.length; i++)
 			if (kompletteAnfrage.equals(laptopDataBase[i][0]))
 				return laptopDataBase[i][1];
 		return "error";
