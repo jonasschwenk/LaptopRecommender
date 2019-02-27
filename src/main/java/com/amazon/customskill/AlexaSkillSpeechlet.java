@@ -62,7 +62,7 @@ public class AlexaSkillSpeechlet implements SpeechletV2 {
 
 	@Override
 	public SpeechletResponse onLaunch(SpeechletRequestEnvelope<LaunchRequest> requestEnvelope) {
-		if(nutzer != null) { //nach einem crash wird das programm bei direktem Neustart am letzten Punkt weiter machen
+		if(nutzer != null) { //nach einem crash wird das programm bei direktem Neustart ohne Serverrestart am letzten Punkt weiter machen
 			String question = nutzer.selectQuestion();
 			return askUserResponse(question);
 		}
