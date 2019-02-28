@@ -10,7 +10,7 @@ public class Gamer implements Nutzer{
 	
 	protected String[][] laptopDataBase = new String [8][2];
 	
-	protected String completteAnfrage = ""; 
+	protected String kompletteAnfrage = leuchten + "," + aktuell + "," + bildschirm; 
 	private int frageCounter = 0;
 		
 	public int getFrageCounter() {
