@@ -62,13 +62,13 @@ public class Gamer implements Nutzer{
 			default: 
 				break;
 		}
-		completteAnfrage = leuchten + "," + aktuell + "," + bildschirm;
+		kompletteAnfrage = leuchten + "," + aktuell + "," + bildschirm;
 	}
 	
 	public String getLaptopFromAnswers() {
 		//array durchgehen und mit anfrage vergleichen
 		for (int i = 0 ; i < laptopDataBase.length ; i++ )
-			if (completteAnfrage.equals(laptopDataBase[i][0]))
+			if (kompletteAnfrage.equals(laptopDataBase[i][0]))
 				return laptopDataBase[i][1];
 		return "error";
 	}
